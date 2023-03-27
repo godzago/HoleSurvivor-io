@@ -7,6 +7,13 @@ using DG.Tweening;
 
 public class HoleManager : MonoBehaviour
 {
+    public bool GameOver;
+
+    private void Awake()
+    {
+        GameOver = false;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Enemy"))
@@ -14,14 +21,15 @@ public class HoleManager : MonoBehaviour
             other.gameObject.GetComponent<Rigidbody>().useGravity = true;
         }
 
-        if (other.gameObject.CompareTag("Enemy_AI"))
+        if (other.gameObject.CompareTag("EnemyAI"))
         {
-            other.gameObject.GetComponent<NavMeshAgent>().baseOffset = -3;
-            other.gameObject.SetActive(false);
+            other.gameObject.GetComponent<NavMeshAgent>().transform.DOMove(new Vector3(transform.position.x, transform.position.y - 5, transform.position.z), 2);
+            Debug.Log("sa");
         }
         if (other.gameObject.CompareTag("Player"))
         {
             other.gameObject.transform.DOMove(new Vector3(transform.position.x, transform.position.y - 5, transform.position.z), 2);
+            GameOver = true;
         }
     }
 }

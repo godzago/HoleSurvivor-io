@@ -944,6 +944,7 @@ GameObject:
   - component: {fileID: 2926379064016078375}
   - component: {fileID: 2926379064016078372}
   - component: {fileID: 6863222763953119489}
+  - component: {fileID: 5180584}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -996,7 +997,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2582610897564458140}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.2
   m_Height: 1.5
@@ -1030,7 +1031,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28ac84bf251f1a34e9ed36748f0cd7fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 350
+  MoveSpeed: 400
+--- !u!114 &5180584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2582610897564458140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c031b780cb1a78429c90902ae0a8f4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uIController: {fileID: 0}
+  ScoreText: {fileID: 0}
+  MoneyPrefeb: {fileID: 2789855989059232949, guid: 3e35168f2f2cc694a8f91a5c03918325, type: 3}
 --- !u!1 &2697470239733142564
 GameObject:
   m_ObjectHideFlags: 0

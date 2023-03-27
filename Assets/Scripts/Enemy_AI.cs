@@ -6,41 +6,34 @@ using UnityEngine.AI;
 
 public class Enemy_AI : MonoBehaviour
 {
-    [SerializeField] private NavMeshAgent agent;
-    [SerializeField] private float range;
+    public float minX = -6f; // AI'nýn sol sýnýrý
+    public float maxX = 6f; // AI'nýn sað sýnýrý
+    public float minZ = -6f; // AI'nýn alt sýnýrý
+    public float maxZ = 6f; // AI'nýn üst sýnýrý
 
-    [SerializeField] private Transform centrePoint;
+    private NavMeshAgent navMeshAgent; // AI'nýn NavMeshAgent bileþeni
 
-    void Awake()
+    void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
+        // NavMeshAgent bileþenini al
+        navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
     void Update()
     {
-        if (agent.remainingDistance <= agent.stoppingDistance)
+        // Eðer hedefe ulaþýlmýþsa yeni hedef belirle
+        if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.5f)
         {
-            Vector3 point;
-            if (RandomPoint(centrePoint.position, range, out point))
-            {
-                Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f); 
-                agent.SetDestination(point);
-            }
+            SetRandomDestination();
         }
     }
 
-    bool RandomPoint(Vector3 center, float range, out Vector3 result)
+    void SetRandomDestination()
     {
+        // Rastgele bir hedef belirle
+        Vector3 randomDestination = new Vector3(Random.Range(minX, maxX), 0f, Random.Range(minZ, maxZ));
 
-        Vector3 randomPoint = center + Random.insideUnitSphere * range;
-        NavMeshHit hit;
-        if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas))
-        {
-            result = hit.position;
-            return true;
-        }
-
-        result = Vector3.zero;
-        return false;
+        // Hedefi ayarla
+        navMeshAgent.SetDestination(randomDestination);
     }
 }

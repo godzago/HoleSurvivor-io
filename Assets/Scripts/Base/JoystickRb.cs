@@ -9,6 +9,7 @@ public class JoystickRb : MonoBehaviour
     private Animator animator;
     [SerializeField] private float MoveSpeed = 10f;
 
+
     private void Awake()
     {
         joystick = GameObject.FindGameObjectWithTag("Joystick").GetComponent<Joystick>();
@@ -30,9 +31,19 @@ public class JoystickRb : MonoBehaviour
         {
             if (Mathf.Abs(horizontal) > 0.1f || Mathf.Abs(vertical) > 0.1f)
             {
+                //animator.SetBool("run", true);
+                //transform.rotation = Quaternion.Euler(0f, (Mathf.Atan2(horizontal * 180, vertical * 180) * Mathf.Rad2Deg), 0f);
+                //rb.velocity = MoveSpeed * Time.fixedDeltaTime * transform.forward;
+
                 animator.SetBool("run", true);
                 transform.rotation = Quaternion.Euler(0f, (Mathf.Atan2(horizontal * 180, vertical * 180) * Mathf.Rad2Deg), 0f);
-                rb.velocity = MoveSpeed * Time.fixedDeltaTime * transform.forward;
+
+                // Sýnýrlama ekleme
+                Vector3 newPosition = transform.position + (MoveSpeed * Time.fixedDeltaTime * transform.forward);
+                newPosition.x = Mathf.Clamp(newPosition.x, -6, 6); // X sýnýrlama
+                newPosition.z = Mathf.Clamp(newPosition.z, -6, 6);// Z sýnýrlama
+                transform.position = newPosition;
+
             }
         }
         else

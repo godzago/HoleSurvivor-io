@@ -9,7 +9,7 @@ using System;
 
 public class UIController : MonoBehaviour
 {
-    [SerializeField] private GameObject WinPanel, LosePanel, InGamePanel, TutorialPanel;
+    [SerializeField] public GameObject WinPanel, LosePanel, InGamePanel, TutorialPanel;
     [SerializeField] private TextMeshProUGUI moneyText, incMoney;
     [SerializeField] private List<string> moneyMulti = new();
     [SerializeField] private GameObject coin;
@@ -152,7 +152,7 @@ public class UIController : MonoBehaviour
         }
         else
         {
-            Debug.Log("Game Over");          
+            LosePanel.SetActive(true);
         }
 
     }
