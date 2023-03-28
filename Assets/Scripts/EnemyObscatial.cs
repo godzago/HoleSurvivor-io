@@ -12,8 +12,11 @@ public class EnemyObscatial : MonoBehaviour
 
     int money;
     [SerializeField] TextMeshProUGUI ScoreText;
-    [SerializeField] GameObject MoneyPrefeb;
 
+    [SerializeField] GameObject MoneyUIPrefeb;
+    [SerializeField] GameObject GoldPanel;
+
+    [SerializeField] GameObject MoneyPrefeb;
 
 
     private void OnTriggerEnter(Collider other)
@@ -28,8 +31,8 @@ public class EnemyObscatial : MonoBehaviour
             money += 5;
             ScoreUpdate();
             other.gameObject.SetActive(false);
-            StartCoroutine(ActivateAfterDelay(2));
-            Instantiate(MoneyPrefeb, Camera.main.WorldToScreenPoint(transform.position), ScoreText.transform.rotation, ScoreText.transform);
+            StartCoroutine(ActivateAfterDelay(3));
+            Instantiate(MoneyUIPrefeb, Camera.main.WorldToScreenPoint(transform.position), GoldPanel.transform.rotation, GoldPanel.transform);
 
         }
 
@@ -42,7 +45,7 @@ public class EnemyObscatial : MonoBehaviour
 
     IEnumerator ActivateAfterDelay(float delay)
     {
-        yield return new WaitForSeconds(2); // Belirtilen gecikme süresini bekleyin
+        yield return new WaitForSeconds(3); // Belirtilen gecikme süresini bekleyin
 
         Vector3 spawnPosition = new Vector3(Random.Range(-4, 4), Random.Range(0, 0), Random.Range(-4, 4));
 

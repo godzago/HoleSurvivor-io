@@ -131,9 +131,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5180584, guid: b78a5bf80885b564280206c27f438fb9, type: 3}
-      propertyPath: MoneyPNG
+      propertyPath: GoldPanel
       value: 
-      objectReference: {fileID: 7775224694607315310, guid: 4fea682a23615544783a3a8d544a5a9a, type: 3}
+      objectReference: {fileID: 6426563230910464750}
     - target: {fileID: 5180584, guid: b78a5bf80885b564280206c27f438fb9, type: 3}
       propertyPath: ScoreText
       value: 
@@ -142,10 +142,6 @@ PrefabInstance:
       propertyPath: uIController
       value: 
       objectReference: {fileID: 2070094112}
-    - target: {fileID: 5180584, guid: b78a5bf80885b564280206c27f438fb9, type: 3}
-      propertyPath: MoneyTrasform
-      value: 
-      objectReference: {fileID: 6426563231012585845}
     - target: {fileID: 2582610897564458140, guid: b78a5bf80885b564280206c27f438fb9, type: 3}
       propertyPath: m_Name
       value: Player
@@ -193,10 +189,6 @@ PrefabInstance:
     - target: {fileID: 2926379064016078374, guid: b78a5bf80885b564280206c27f438fb9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6863222763953119489, guid: b78a5bf80885b564280206c27f438fb9, type: 3}
-      propertyPath: MoveSpeed
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b78a5bf80885b564280206c27f438fb9, type: 3}
@@ -17237,10 +17229,6 @@ PrefabInstance:
     - target: {fileID: 2040345051961321294, guid: 75e0a4ea7b05445499279d5f851bae17, type: 3}
       propertyPath: m_Name
       value: Big Grinder
-      objectReference: {fileID: 0}
-    - target: {fileID: 2040345051961321294, guid: 75e0a4ea7b05445499279d5f851bae17, type: 3}
-      propertyPath: m_TagString
-      value: EnemyObscatial
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75e0a4ea7b05445499279d5f851bae17, type: 3}

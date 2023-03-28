@@ -15,7 +15,7 @@ public class MoneyUI : MonoBehaviour
 
     void SetAnim()
     {
-        scoreAreaTransform = GameObject.FindGameObjectWithTag("MoneUI").transform;
+        scoreAreaTransform = GameObject.FindGameObjectWithTag("MoneyUI").transform;
         goldAnimation = DOTween.Sequence();
 
         goldAnimation.Append(transform.DOMove(scoreAreaTransform.position, 2).SetEase(Ease.InOutBack)).OnComplete(() => Destroy(gameObject));

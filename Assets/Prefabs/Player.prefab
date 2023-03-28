@@ -1031,7 +1031,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28ac84bf251f1a34e9ed36748f0cd7fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 400
+  MoveSpeed: 5
 --- !u!114 &5180584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1046,6 +1046,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uIController: {fileID: 0}
   ScoreText: {fileID: 0}
+  MoneyUIPrefeb: {fileID: 2423572406813927641, guid: 5876e071e54c79f4b93c43ef2b8831d4, type: 3}
+  GoldPanel: {fileID: 0}
   MoneyPrefeb: {fileID: 2789855989059232949, guid: 3e35168f2f2cc694a8f91a5c03918325, type: 3}
 --- !u!1 &2697470239733142564
 GameObject:
