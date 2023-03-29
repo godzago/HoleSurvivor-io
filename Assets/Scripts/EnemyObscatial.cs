@@ -18,12 +18,16 @@ public class EnemyObscatial : MonoBehaviour
 
     [SerializeField] GameObject MoneyPrefeb;
 
-
+    [SerializeField] ParticleSystem ParticleSystem;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("EnemyObscatial"))
         {
-            uIController.LosePanel.SetActive(true);
+            money -= 5;
+            ScoreUpdate();
+            Camera.main.GetComponent<Shake>().StartShake();
+            ParticleSystem.Play();
+            Invoke("StopParticleSystem", 0.5f);
         }
 
         if (other.gameObject.CompareTag("Money"))
@@ -36,6 +40,10 @@ public class EnemyObscatial : MonoBehaviour
 
         }
 
+    }
+    void StopParticleSystem()
+    {
+        ParticleSystem.Stop();
     }
     public void ScoreUpdate()
     {

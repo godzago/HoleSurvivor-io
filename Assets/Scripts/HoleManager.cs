@@ -24,7 +24,6 @@ public class HoleManager : MonoBehaviour
         if (other.gameObject.CompareTag("EnemyAI"))
         {
             other.gameObject.GetComponent<NavMeshAgent>().transform.DOMove(new Vector3(transform.position.x, transform.position.y - 5, transform.position.z), 2);
-            Debug.Log("sa");
         }
         if (other.gameObject.CompareTag("Player"))
         {

@@ -12,6 +12,7 @@ public class JoystickRb : MonoBehaviour
 
     private void Awake()
     {
+        Application.targetFrameRate = 60;
         joystick = GameObject.FindGameObjectWithTag("Joystick").GetComponent<Joystick>();
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();

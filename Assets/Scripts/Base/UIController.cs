@@ -24,16 +24,22 @@ public class UIController : MonoBehaviour
 
     private bool coinanim;
 
+    [SerializeField] Animator animator;
+
     [SerializeField] Slider bar;
     [SerializeField] TextMeshProUGUI TimmerText;
     [SerializeField] float totalTime;
 
+    public bool TimeOver;
+
     private float timeLeft;
+
     private void Awake()
     {
         ScriptInitialize();
         ButtonInitialize();
-        
+        TimeOver = false;
+        animator.SetTrigger("close");
     }
 
     private void Start()
@@ -149,10 +155,18 @@ public class UIController : MonoBehaviour
             bar.value = timeLeft;
             string timeString = FormatTime(timeLeft);
             TimmerText.text = timeString;
+
+            if (timeLeft <= 10)
+            {
+                animator.SetTrigger("open");
+            }
         }
+
         else
         {
             LosePanel.SetActive(true);
+            TimeOver = true;
+            animator.SetTrigger("close");
         }
 
     }
