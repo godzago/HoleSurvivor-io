@@ -79,7 +79,6 @@ public class UIController : MonoBehaviour
         panelChild.transform.localScale = Vector3.zero;
         panelChild.SetActive(true);
         panelChild.transform.DOScale(Vector3.one, 0.5f);
-
         UICanvas.worldCamera = Camera.main;
         UICanvas.renderMode = canvasMode ? RenderMode.ScreenSpaceCamera : RenderMode.ScreenSpaceOverlay;
     }

@@ -8,6 +8,7 @@ using DG.Tweening;
 public class HoleManager : MonoBehaviour
 {
     public bool GameOver;
+    [SerializeField] UIController uIController;
 
     private void Awake()
     {
@@ -29,6 +30,13 @@ public class HoleManager : MonoBehaviour
         {
             other.gameObject.transform.DOMove(new Vector3(transform.position.x, transform.position.y - 5, transform.position.z), 2);
             GameOver = true;
+            StartCoroutine(ActivateAfterDelay(1));       
         }
+    }
+
+    IEnumerator ActivateAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(1);
+        uIController.LosePanel.SetActive(true);     
     }
 }
