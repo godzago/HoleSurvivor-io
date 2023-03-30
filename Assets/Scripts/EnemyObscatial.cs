@@ -19,6 +19,8 @@ public class EnemyObscatial : MonoBehaviour
     [SerializeField] GameObject MoneyPrefeb;
 
     [SerializeField] ParticleSystem ParticleSystem;
+
+    [SerializeField] AudioClip _clip;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("EnemyObscatial"))
@@ -37,6 +39,7 @@ public class EnemyObscatial : MonoBehaviour
             other.gameObject.SetActive(false);
             StartCoroutine(ActivateAfterDelay(3));
             Instantiate(MoneyUIPrefeb, Camera.main.WorldToScreenPoint(transform.position), GoldPanel.transform.rotation, GoldPanel.transform);
+            SoundManager.Instance.PlaySound(_clip);
 
         }
 
