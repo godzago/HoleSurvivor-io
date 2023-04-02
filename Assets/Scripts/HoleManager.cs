@@ -13,6 +13,7 @@ public class HoleManager : MonoBehaviour
     private void Awake()
     {
         GameOver = false;
+        Time.timeScale = 1;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -30,13 +31,14 @@ public class HoleManager : MonoBehaviour
         {
             other.gameObject.transform.DOMove(new Vector3(transform.position.x, transform.position.y - 5, transform.position.z), 2);
             GameOver = true;
-            StartCoroutine(ActivateAfterDelay(1));       
+            StartCoroutine(ActivateAfterDelay(1));        
         }
     }
 
     IEnumerator ActivateAfterDelay(float delay)
     {
         yield return new WaitForSeconds(1);
-        uIController.LosePanel.SetActive(true);     
+        uIController.LosePanel.SetActive(true);
+        Time.timeScale = 0;
     }
 }

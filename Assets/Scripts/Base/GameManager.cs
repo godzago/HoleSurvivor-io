@@ -10,7 +10,6 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public UnityEvent GameEnd = new();
     [HideInInspector] public UnityEvent LevelSuccess = new();
     [HideInInspector] public UnityEvent LevelFail = new();
-    [HideInInspector] public UnityEvent OnMoneyChange = new();
 
     private float _PlayerMoney;
     public float PlayerMoney
@@ -23,7 +22,6 @@ public class GameManager : Singleton<GameManager>
         {
             incMoney = value - _PlayerMoney;
             _PlayerMoney = value;
-            OnMoneyChange.Invoke();
         }
     }
 

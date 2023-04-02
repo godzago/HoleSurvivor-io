@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
 using System;
+using UnityEngine.SceneManagement;
 
 
 public class UIController : MonoBehaviour
@@ -44,7 +45,6 @@ public class UIController : MonoBehaviour
 
     private void Start()
     {
-        GameManager.Instance.OnMoneyChange.Invoke();
         timeLeft = totalTime;
         bar.minValue = 0f;
         bar.maxValue = totalTime;
@@ -126,7 +126,6 @@ public class UIController : MonoBehaviour
         GameManager.Instance.LevelFail.AddListener(() => ShowPanel(LosePanel, true));
         GameManager.Instance.LevelSuccess.AddListener(() => ShowPanel(WinPanel, true));
         GameManager.Instance.GameReady.AddListener(GameReady);
-        GameManager.Instance.OnMoneyChange.AddListener(SetMoneyText);
     }
 
     private void OnDisable()
@@ -163,9 +162,10 @@ public class UIController : MonoBehaviour
 
         else
         {
-            LosePanel.SetActive(true);
+            WinPanel.SetActive(true);
             TimeOver = true;
             animator.SetTrigger("close");
+            Time.timeScale = 0;
         }
 
     }
@@ -173,6 +173,12 @@ public class UIController : MonoBehaviour
     {
         int seconds = Mathf.FloorToInt(time % 60f);
         return string.Format("{0:00}", seconds);
+    }
+
+
+    public void NextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
 }
