@@ -42,7 +42,7 @@ public class JoystickRb : MonoBehaviour
                 // Sýnýrlama ekleme
                 Vector3 newPosition = transform.position + (MoveSpeed * Time.fixedDeltaTime * transform.forward);
                 newPosition.x = Mathf.Clamp(newPosition.x, -6, 6); // X sýnýrlama
-                newPosition.z = Mathf.Clamp(newPosition.z, -6, 6);// Z sýnýrlama
+                newPosition.z = Mathf.Clamp(newPosition.z, -6.5f, 6.5f);// Z sýnýrlama
                 transform.position = newPosition;
 
             }

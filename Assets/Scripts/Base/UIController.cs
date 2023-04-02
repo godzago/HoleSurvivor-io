@@ -11,7 +11,7 @@ using UnityEngine.SceneManagement;
 public class UIController : MonoBehaviour
 {
     [SerializeField] public GameObject WinPanel, LosePanel, InGamePanel, TutorialPanel;
-    [SerializeField] private TextMeshProUGUI moneyText, incMoney;
+    [SerializeField] private TextMeshProUGUI moneyText; /*incMoney*/
     [SerializeField] private List<string> moneyMulti = new();
     [SerializeField] private GameObject coin;
 
@@ -68,8 +68,8 @@ public class UIController : MonoBehaviour
         Next = WinPanel.GetComponentInChildren<Button>();
         Restart = LosePanel.GetComponentInChildren<Button>();
 
-        Next.onClick.AddListener(() => levelManager.LoadLevel(1));
-        Restart.onClick.AddListener(() => levelManager.LoadLevel(0));
+        //Next.onClick.AddListener(() => levelManager.LoadLevel(1));
+        //Restart.onClick.AddListener(() => levelManager.LoadLevel(0));
     }
 
     void ShowPanel(GameObject panel, bool canvasMode = false)
@@ -96,9 +96,9 @@ public class UIController : MonoBehaviour
         coin.transform.DORewind();
         coin.transform.DOShakeScale(1);
 
-        incMoney.gameObject.SetActive(true);
+        //incMoney.gameObject.SetActive(true);
 
-        incMoney.text = GameManager.Instance.incMoney > 0 ? "+" + GameManager.Instance.incMoney : GameManager.Instance.incMoney.ToString();
+        //incMoney.text = GameManager.Instance.incMoney > 0 ? "+" + GameManager.Instance.incMoney : GameManager.Instance.incMoney.ToString();
 
         CancelInvoke(nameof(incMoneyFalse));
         Invoke(nameof(incMoneyFalse), 1.5f);
@@ -118,7 +118,7 @@ public class UIController : MonoBehaviour
 
     void incMoneyFalse()
     {
-        incMoney.gameObject.SetActive(false);
+        //incMoney.gameObject.SetActive(false);
     }
 
     private void OnEnable()
@@ -179,6 +179,11 @@ public class UIController : MonoBehaviour
     public void NextLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
 }
