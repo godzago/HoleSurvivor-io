@@ -27,13 +27,20 @@ public class UIController : MonoBehaviour
 
     [SerializeField] Animator animator;
 
-    [SerializeField] Slider bar;
-    [SerializeField] TextMeshProUGUI TimmerText;
-    [SerializeField] float totalTime;
+    //[SerializeField] Slider bar;
+    //[SerializeField] TextMeshProUGUI TimmerText;
+    //[SerializeField] float totalTime;
 
     public bool TimeOver;
 
-    private float timeLeft;
+    //private float timeLeft;
+
+    [SerializeField] private Image uiFill;
+    [SerializeField] private TextMeshProUGUI uiText;
+
+    public int Duration;
+
+    private int remainingDuration;
 
     private void Awake()
     {
@@ -45,15 +52,11 @@ public class UIController : MonoBehaviour
 
     private void Start()
     {
-        timeLeft = totalTime;
-        bar.minValue = 0f;
-        bar.maxValue = totalTime;
-        bar.value = timeLeft; 
-    }
-
-    private void Update()
-    {
-        Timmer();
+        //timeLeft = totalTime;
+        //bar.minValue = 0f;
+        //bar.maxValue = totalTime;
+        //bar.value = timeLeft;
+        Being(Duration);
     }
 
     void ScriptInitialize()
@@ -144,35 +147,61 @@ public class UIController : MonoBehaviour
     }
 
 
-    void Timmer()
+    //void Timmer()
+    //{
+
+    //    if (timeLeft > 0f)
+    //    {
+    //        timeLeft -= Time.deltaTime;
+    //        bar.value = timeLeft;
+    //        string timeString = FormatTime(timeLeft);
+    //        TimmerText.text = timeString;
+
+    //        if (timeLeft <= 10)
+    //        {
+    //            animator.SetTrigger("open");
+    //        }
+    //    }
+
+    //    else
+    //    {
+    //        WinPanel.SetActive(true);
+    //        TimeOver = true;
+    //        animator.SetTrigger("close");
+    //        Time.timeScale = 0;
+    //    }
+
+    //}
+    //private string FormatTime(float time)
+    //{
+    //    int seconds = Mathf.FloorToInt(time % 60f);
+    //    return string.Format("{0:00}", seconds);
+    //}
+
+    private void Being(int Second)
     {
-
-        if (timeLeft > 0f)
-        {
-            timeLeft -= Time.deltaTime;
-            bar.value = timeLeft;
-            string timeString = FormatTime(timeLeft);
-            TimmerText.text = timeString;
-
-            if (timeLeft <= 10)
-            {
-                animator.SetTrigger("open");
-            }
-        }
-
-        else
-        {
-            WinPanel.SetActive(true);
-            TimeOver = true;
-            animator.SetTrigger("close");
-            Time.timeScale = 0;
-        }
-
+        remainingDuration = Second;
+        StartCoroutine(UpdateTimer());
     }
-    private string FormatTime(float time)
+
+    private IEnumerator UpdateTimer()
     {
-        int seconds = Mathf.FloorToInt(time % 60f);
-        return string.Format("{0:00}", seconds);
+        while (remainingDuration >= 0)
+        {
+                uiText.text = $"{remainingDuration / 60:00}:{remainingDuration % 60:00}";
+                uiFill.fillAmount = Mathf.InverseLerp(0, Duration, remainingDuration);
+                remainingDuration--;
+                yield return new WaitForSeconds(1f);
+        }
+        OnEnd();
+    }
+
+    private void OnEnd()
+    {
+        //End Time , if want Do something
+        WinPanel.SetActive(true);
+        TimeOver = true;
+        Time.timeScale = 0;
     }
 
 
