@@ -997,7 +997,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2582610897564458140}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.2
   m_Height: 1.5
@@ -1050,7 +1050,7 @@ MonoBehaviour:
   GoldPanel: {fileID: 0}
   MoneyPrefeb: {fileID: 2789855989059232949, guid: 3e35168f2f2cc694a8f91a5c03918325, type: 3}
   ParticleSystem: {fileID: 0}
-  _clip: {fileID: 8300000, guid: e2da1d22c5b9c7146b5f561b2452f5f7, type: 3}
+  rgb: {fileID: 2926379064016078372}
 --- !u!1 &2697470239733142564
 GameObject:
   m_ObjectHideFlags: 0
@@ -1328,7 +1328,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5a59e7ff554c8c847a437b6f30ca70de, type: 2}
+  - {fileID: 2100000, guid: e68eccfc5c9d3db46b406d72e3788a5f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

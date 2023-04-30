@@ -14,6 +14,7 @@ public class HoleManager : MonoBehaviour
     {
         GameOver = false;
         Time.timeScale = 1;
+        AudioManager.Instance.PlayMusic("Theme");
     }
 
     private void OnTriggerEnter(Collider other)
@@ -34,13 +35,13 @@ public class HoleManager : MonoBehaviour
             StartCoroutine(ActivateAfterDelay(1));        
         }
     }
-
-
      
     IEnumerator ActivateAfterDelay(float delay)
     {
         yield return new WaitForSeconds(1);
         uIController.LosePanel.SetActive(true);
+        AudioManager.Instance.musicSource.Stop();
+        AudioManager.Instance.PlaySFX("Lose");
         Time.timeScale = 0;
     }
 }

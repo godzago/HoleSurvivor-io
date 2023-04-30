@@ -840,11 +840,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4388720429592355118}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.7321762, z: 1}
-  m_Center: {x: 0, y: 0.26928872, z: 0}
+  m_Size: {x: 1, y: 2.0551076, z: 1}
+  m_Center: {x: 0, y: 0.9307544, z: 0}
 --- !u!54 &1514217065
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -859,7 +859,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 36
   m_CollisionDetection: 0
 --- !u!1 &4530708831424411690
 GameObject:
@@ -1425,7 +1425,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4d770e5c33c10b1428805bc28b62e753, type: 2}
+  - {fileID: 2100000, guid: 3f447549ff5574841ac6312c882621ae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

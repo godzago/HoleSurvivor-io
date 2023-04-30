@@ -20,31 +20,16 @@ public class EnemyObscatial : MonoBehaviour
 
     [SerializeField] ParticleSystem ParticleSystem;
 
-    [SerializeField] HoleManager hole;
-
-
-    [SerializeField] AudioClip _clip;
-
     [SerializeField] Rigidbody rgb;
-
-
-    
-
-    private void Awake()
-    {
-        hole = FindObjectOfType<HoleManager>();
-
-    }
+  
 
     private void LateUpdate()
     {
-
         if (money < 0)
         {
             uIController.LosePanel.SetActive(true);
             
         }
-
     }
 
     private void OnTriggerEnter(Collider other)
@@ -56,7 +41,7 @@ public class EnemyObscatial : MonoBehaviour
             other.gameObject.SetActive(false);
             StartCoroutine(ActivateAfterDelay(3));
             Instantiate(MoneyUIPrefeb, Camera.main.WorldToScreenPoint(transform.position), GoldPanel.transform.rotation, GoldPanel.transform);
-            SoundManager.Instance.PlaySound(_clip);
+            AudioManager.Instance.PlaySFX("Coin");
         }
     }
 
@@ -75,13 +60,10 @@ public class EnemyObscatial : MonoBehaviour
         {
             Vector3 valueDistance = collision.transform.position - gameObject.transform.position;
             float valueZ = Random.Range(-2f, 2f);
-            //gameObject.GetComponent<Rigidbody>().AddForce(valueDistance * Random.Range(-100,100));
 
             gameObject.transform.DOMove(transform.position + new Vector3(valueZ, 0 , valueZ), 0.3f);            
         }
-    }
-
-    
+    }  
 
     void StopParticleSystem()
     {
@@ -95,7 +77,7 @@ public class EnemyObscatial : MonoBehaviour
 
     IEnumerator ActivateAfterDelay(float delay)
     {
-        yield return new WaitForSeconds(3); // Belirtilen gecikme süresini bekleyin
+        yield return new WaitForSeconds(3);
 
         Vector3 spawnPosition = new Vector3(Random.Range(-4, 4), Random.Range(0, 0), Random.Range(-4, 4));
 

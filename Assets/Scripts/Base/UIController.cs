@@ -27,13 +27,7 @@ public class UIController : MonoBehaviour
 
     [SerializeField] Animator animator;
 
-    //[SerializeField] Slider bar;
-    //[SerializeField] TextMeshProUGUI TimmerText;
-    //[SerializeField] float totalTime;
-
     public bool TimeOver;
-
-    //private float timeLeft;
 
     [SerializeField] private Image uiFill;
     [SerializeField] private TextMeshProUGUI uiText;
@@ -41,6 +35,7 @@ public class UIController : MonoBehaviour
     public int Duration;
 
     private int remainingDuration;
+
 
     private void Awake()
     {
@@ -52,10 +47,6 @@ public class UIController : MonoBehaviour
 
     private void Start()
     {
-        //timeLeft = totalTime;
-        //bar.minValue = 0f;
-        //bar.maxValue = totalTime;
-        //bar.value = timeLeft;
         Being(Duration);
     }
 
@@ -147,37 +138,6 @@ public class UIController : MonoBehaviour
     }
 
 
-    //void Timmer()
-    //{
-
-    //    if (timeLeft > 0f)
-    //    {
-    //        timeLeft -= Time.deltaTime;
-    //        bar.value = timeLeft;
-    //        string timeString = FormatTime(timeLeft);
-    //        TimmerText.text = timeString;
-
-    //        if (timeLeft <= 10)
-    //        {
-    //            animator.SetTrigger("open");
-    //        }
-    //    }
-
-    //    else
-    //    {
-    //        WinPanel.SetActive(true);
-    //        TimeOver = true;
-    //        animator.SetTrigger("close");
-    //        Time.timeScale = 0;
-    //    }
-
-    //}
-    //private string FormatTime(float time)
-    //{
-    //    int seconds = Mathf.FloorToInt(time % 60f);
-    //    return string.Format("{0:00}", seconds);
-    //}
-
     private void Being(int Second)
     {
         remainingDuration = Second;
@@ -191,6 +151,11 @@ public class UIController : MonoBehaviour
                 uiText.text = $"{remainingDuration / 60:00}:{remainingDuration % 60:00}";
                 uiFill.fillAmount = Mathf.InverseLerp(0, Duration, remainingDuration);
                 remainingDuration--;
+            if (remainingDuration == 3)
+            {
+                AudioManager.Instance.PlaySFX("Last4Sec");
+            }
+            
                 yield return new WaitForSeconds(1f);
         }
         OnEnd();
@@ -198,12 +163,12 @@ public class UIController : MonoBehaviour
 
     private void OnEnd()
     {
-        //End Time , if want Do something
         WinPanel.SetActive(true);
+        AudioManager.Instance.musicSource.Stop();
+        AudioManager.Instance.PlaySFX("Win");
         TimeOver = true;
         Time.timeScale = 0;
     }
-
 
     public void NextLevel()
     {
@@ -214,5 +179,4 @@ public class UIController : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-
 }

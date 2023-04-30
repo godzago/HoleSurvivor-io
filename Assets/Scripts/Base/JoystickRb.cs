@@ -32,17 +32,11 @@ public class JoystickRb : MonoBehaviour
         {
             if (Mathf.Abs(horizontal) > 0.1f || Mathf.Abs(vertical) > 0.1f)
             {
-                //animator.SetBool("run", true);
-                //transform.rotation = Quaternion.Euler(0f, (Mathf.Atan2(horizontal * 180, vertical * 180) * Mathf.Rad2Deg), 0f);
-                //rb.velocity = MoveSpeed * Time.fixedDeltaTime * transform.forward;
 
                 animator.SetBool("run", true);
                 transform.rotation = Quaternion.Euler(0f, (Mathf.Atan2(horizontal * 180, vertical * 180) * Mathf.Rad2Deg), 0f);
 
-                // Sýnýrlama ekleme
                 Vector3 newPosition = transform.position + (MoveSpeed * Time.fixedDeltaTime * transform.forward);
-                //newPosition.x = Mathf.Clamp(newPosition.x, -6, 6); // X sýnýrlama
-                //newPosition.z = Mathf.Clamp(newPosition.z, -6.5f, 6.5f);// Z sýnýrlama
                 transform.position = newPosition;
 
             }
