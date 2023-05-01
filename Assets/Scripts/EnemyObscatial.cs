@@ -52,6 +52,7 @@ public class EnemyObscatial : MonoBehaviour
             money -= 5;
             ScoreUpdate();
             Camera.main.GetComponent<Shake>().StartShake();
+            
             ParticleSystem.Play();
             Invoke("StopParticleSystem", 0.5f);
         }
