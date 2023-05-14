@@ -41,13 +41,13 @@ public class UIController : MonoBehaviour
     {
         ScriptInitialize();
         ButtonInitialize();
-        TimeOver = false;
-        animator.SetTrigger("close");
+        TimeOver = false;      
     }
 
     private void Start()
     {
         Being(Duration);
+        //animator.SetTrigger("close");
     }
 
     void ScriptInitialize()
