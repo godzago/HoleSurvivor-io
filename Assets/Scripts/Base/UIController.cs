@@ -10,6 +10,9 @@ using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
+
+    public static UIController Instance; 
+
     [SerializeField] public GameObject WinPanel, LosePanel, InGamePanel, TutorialPanel;
     [SerializeField] private TextMeshProUGUI moneyText; /*incMoney*/
     [SerializeField] private List<string> moneyMulti = new();
@@ -37,11 +40,14 @@ public class UIController : MonoBehaviour
     private int remainingDuration;
 
 
+
+
     private void Awake()
     {
         ScriptInitialize();
         ButtonInitialize();
-        TimeOver = false;      
+        TimeOver = false;
+        Instance = this;
     }
 
     private void Start()
