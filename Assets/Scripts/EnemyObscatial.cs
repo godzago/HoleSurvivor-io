@@ -21,14 +21,12 @@ public class EnemyObscatial : MonoBehaviour
     [SerializeField] ParticleSystem ParticleSystem;
 
     [SerializeField] Rigidbody rgb;
-  
 
     private void LateUpdate()
     {
         if (money < 0)
         {
-            uIController.LosePanel.SetActive(true);
-            
+            uIController.LosePanel.SetActive(true);            
         }
     }
 
@@ -41,6 +39,7 @@ public class EnemyObscatial : MonoBehaviour
             other.gameObject.SetActive(false);
             StartCoroutine(ActivateAfterDelay(3));
             Instantiate(MoneyUIPrefeb, Camera.main.WorldToScreenPoint(transform.position), GoldPanel.transform.rotation, GoldPanel.transform);
+            //other.GetComponent<Money>().SetCollected();
             AudioManager.Instance.PlaySFX("Coin");
         }
     }
@@ -51,8 +50,7 @@ public class EnemyObscatial : MonoBehaviour
         {
             money -= 5;
             ScoreUpdate();
-            Camera.main.GetComponent<Shake>().StartShake();
-            
+            Camera.main.GetComponent<Shake>().StartShake();           
             ParticleSystem.Play();
             Invoke("StopParticleSystem", 0.5f);
         }

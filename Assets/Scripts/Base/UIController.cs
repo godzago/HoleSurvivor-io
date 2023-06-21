@@ -40,8 +40,6 @@ public class UIController : MonoBehaviour
     private int remainingDuration;
 
 
-
-
     private void Awake()
     {
         ScriptInitialize();
@@ -142,6 +140,15 @@ public class UIController : MonoBehaviour
     {
         TutorialPanel.transform.GetChild(settings.GetTutorialIndex()).gameObject.SetActive(true);
     }
+
+    //public Vector3 GetIconPosition(Vector3 target)
+    //{
+    //    Vector3 uýPos = iconTrasform.position;
+    //    uýPos.z = (target - mainCamera.transform.position).z;
+
+    //    Vector3 result = mainCamera.ScreenToWorldPoint(uýPos);
+    //    return result;
+    //}
 
 
     private void Being(int Second)
