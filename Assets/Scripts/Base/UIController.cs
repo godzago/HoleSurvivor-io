@@ -13,7 +13,7 @@ public class UIController : MonoBehaviour
 
     public static UIController Instance; 
 
-    [SerializeField] public GameObject WinPanel, LosePanel, InGamePanel, TutorialPanel;
+    [SerializeField] public GameObject WinPanel, LosePanel, InGamePanel;
     [SerializeField] private TextMeshProUGUI moneyText; /*incMoney*/
     [SerializeField] private List<string> moneyMulti = new();
     [SerializeField] private GameObject coin;
@@ -39,6 +39,8 @@ public class UIController : MonoBehaviour
 
     private int remainingDuration;
 
+    public GameObject TutorialPanelObject;
+
 
     private void Awake()
     {
@@ -52,6 +54,31 @@ public class UIController : MonoBehaviour
     {
         Being(Duration);
         //animator.SetTrigger("close");
+        if (PlayerPrefs.HasKey("TutorialPanel") == false)
+        {
+            PlayerPrefs.SetInt("TutorialPanel", 1);
+        }
+    }
+    void Update()
+    {
+        //if (Input.GetMouseButtonDown(0) && PlayerPrefs.GetInt("TutorialPanel") == 1)
+        //{
+        //    PanelTutorail();
+        //}
+        //else
+        //{
+        //    PanelTutorailClose();
+        //}
+    }
+
+    void PanelTutorail()
+    {
+        TutorialPanelObject.SetActive(true);
+        PlayerPrefs.SetInt("TutorialPanel", 2);
+    }
+    void PanelTutorailClose()
+    {
+        TutorialPanelObject.SetActive(false);
     }
 
     void ScriptInitialize()
@@ -86,7 +113,6 @@ public class UIController : MonoBehaviour
         WinPanel.SetActive(false);
         LosePanel.SetActive(false);
         InGamePanel.SetActive(true);
-        ShowTutorial();
     }
 
     void SetMoneyText()
@@ -136,10 +162,6 @@ public class UIController : MonoBehaviour
         }
     }
 
-    void ShowTutorial()
-    {
-        TutorialPanel.transform.GetChild(settings.GetTutorialIndex()).gameObject.SetActive(true);
-    }
 
     //public Vector3 GetIconPosition(Vector3 target)
     //{

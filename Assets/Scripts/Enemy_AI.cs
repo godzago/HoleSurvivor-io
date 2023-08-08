@@ -13,7 +13,6 @@ public class Enemy_AI : MonoBehaviour
 
     private NavMeshAgent navMeshAgent; // AI'nýn NavMeshAgent bileþeni
     private Animator animator;
-    [SerializeField] GameObject tutorialObject;
     bool IamIdleNow = true;
 
     void Start()
@@ -42,8 +41,6 @@ public class Enemy_AI : MonoBehaviour
     {
         if (IamIdleNow == false)
         {
-            AnimationClose();
-            tutorialObject.SetActive(false);
             // Rastgele bir hedef belirle
             Vector3 randomDestination = new Vector3(Random.Range(minX, maxX), 0f, Random.Range(minZ, maxZ));
 
@@ -52,8 +49,7 @@ public class Enemy_AI : MonoBehaviour
         }
         else
         {
-            AnimationOpen();
-            tutorialObject.SetActive(true);
+
         }
         
     }

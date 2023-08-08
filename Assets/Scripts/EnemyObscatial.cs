@@ -58,7 +58,7 @@ public class EnemyObscatial : MonoBehaviour
         if (collision.gameObject.CompareTag("EnemyAI"))
         {
             Vector3 valueDistance = collision.transform.position - gameObject.transform.position;
-            float valueZ = Random.Range(-2f, 2f);
+            float valueZ = Random.Range(-1f, 1f);
 
             gameObject.transform.DOMove(transform.position + new Vector3(valueZ, 0 , valueZ), 0.3f);            
         }
