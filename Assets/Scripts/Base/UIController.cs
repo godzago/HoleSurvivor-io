@@ -56,29 +56,23 @@ public class UIController : MonoBehaviour
         //animator.SetTrigger("close");
         if (PlayerPrefs.HasKey("TutorialPanel") == false)
         {
-            PlayerPrefs.SetInt("TutorialPanel", 1);
+            PlayerPrefs.SetInt("TutorialPanel", 1);        
+        }
+        if (PlayerPrefs.GetInt("TutorialPanel") == 1)
+        {
+            StartCoroutine(PanelTutorailClose());
         }
     }
-    void Update()
-    {
-        //if (Input.GetMouseButtonDown(0) && PlayerPrefs.GetInt("TutorialPanel") == 1)
-        //{
-        //    PanelTutorail();
-        //}
-        //else
-        //{
-        //    PanelTutorailClose();
-        //}
-    }
 
-    void PanelTutorail()
+    IEnumerator PanelTutorailClose()
     {
-        TutorialPanelObject.SetActive(true);
-        PlayerPrefs.SetInt("TutorialPanel", 2);
-    }
-    void PanelTutorailClose()
-    {
-        TutorialPanelObject.SetActive(false);
+        if (TutorialPanelObject !=null)
+        {
+            TutorialPanelObject.SetActive(true);
+            yield return new WaitForSeconds(2);
+            TutorialPanelObject.SetActive(false);
+            PlayerPrefs.SetInt("TutorialPanel", 2);
+        }
     }
 
     void ScriptInitialize()
@@ -208,6 +202,11 @@ public class UIController : MonoBehaviour
     public void NextLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void PreviousLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + -1);
     }
 
     public void RestartGame()

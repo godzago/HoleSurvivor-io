@@ -10,7 +10,7 @@ public class EnemyObscatial : MonoBehaviour
 {
     [SerializeField] UIController uIController;
 
-    int money;
+    int money = 10;
     [SerializeField] TextMeshProUGUI ScoreText;
 
     [SerializeField] GameObject MoneyUIPrefeb;
@@ -22,6 +22,17 @@ public class EnemyObscatial : MonoBehaviour
 
     [SerializeField] Rigidbody rgb;
 
+    private void Awake()
+    {
+        if (PlayerPrefs.HasKey("coins") == false)
+        {
+            PlayerPrefs.SetInt("coins", 0);
+        }
+    }
+    private void Start()
+    {
+        money = PlayerPrefs.GetInt("coins");
+    }
     private void LateUpdate()
     {
         if (money < 0)
@@ -34,12 +45,10 @@ public class EnemyObscatial : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Money"))
         {
-            money += 5;
-            ScoreUpdate();
+            AddCountCoins(+10);
             other.gameObject.SetActive(false);
             StartCoroutine(ActivateAfterDelay(3));
             Instantiate(MoneyUIPrefeb, Camera.main.WorldToScreenPoint(transform.position), GoldPanel.transform.rotation, GoldPanel.transform);
-            //other.GetComponent<Money>().SetCollected();
             AudioManager.Instance.PlaySFX("Coin");
         }
     }
@@ -48,8 +57,7 @@ public class EnemyObscatial : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("EnemyObscatial"))
         {
-            money -= 5;
-            ScoreUpdate();
+            AddCountCoins(-15);
             Camera.main.GetComponent<Shake>().StartShake();           
             ParticleSystem.Play();
             Invoke("StopParticleSystem", 0.5f);
@@ -68,10 +76,11 @@ public class EnemyObscatial : MonoBehaviour
     {
         ParticleSystem.Stop();
     }
-    public void ScoreUpdate()
+    public void AddCountCoins(int amount)
     {
-
+        money += amount;
         ScoreText.text = money.ToString();
+        PlayerPrefs.SetInt("coins", money);
     }
 
     IEnumerator ActivateAfterDelay(float delay)
