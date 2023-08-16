@@ -9,12 +9,19 @@ public class HoleManager : MonoBehaviour
 {
     public bool GameOver;
     [SerializeField] UIController uIController;
+    int GameStart;
 
     private void Awake()
     {
         GameOver = false;
-        Time.timeScale = 1;
         AudioManager.Instance.PlayMusic("Theme");
+
+        Time.timeScale = 1;
+
+        if (PlayerPrefs.HasKey(nameof(GameStart)) == false)
+        {
+            PlayerPrefs.SetInt(nameof(GameStart), 0);
+        }
     }
 
     private void OnTriggerEnter(Collider other)

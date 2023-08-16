@@ -12,6 +12,7 @@ public class Hole_AI : MonoBehaviour
 
     private NavMeshAgent navMeshAgent; // AI'nýn NavMeshAgent bileþeni
 
+
     void Start()
     {
         // NavMeshAgent bileþenini al
@@ -21,7 +22,7 @@ public class Hole_AI : MonoBehaviour
     void Update()
     {
         // Eðer hedefe ulaþýlmýþsa yeni hedef belirle
-        if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.5f)
+        if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.5f && PlayerPrefs.GetInt("GameStart") == 1)
         {
             SetRandomDestination();
         }

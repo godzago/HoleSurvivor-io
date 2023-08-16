@@ -76,6 +76,7 @@ public class EnemyObscatial : MonoBehaviour
     {
         ParticleSystem.Stop();
     }
+
     public void AddCountCoins(int amount)
     {
         money += amount;

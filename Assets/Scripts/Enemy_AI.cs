@@ -31,7 +31,7 @@ public class Enemy_AI : MonoBehaviour
         }
 
         // Eðer hedefe ulaþýlmýþsa yeni hedef belirle
-        if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.5f)
+        if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.5f && PlayerPrefs.GetInt("GameStart") == 1)
         {
             SetRandomDestination();
         }
@@ -50,8 +50,7 @@ public class Enemy_AI : MonoBehaviour
         else
         {
 
-        }
-        
+        }     
     }
 
     void AnimationOpen()

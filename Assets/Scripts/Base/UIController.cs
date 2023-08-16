@@ -30,12 +30,14 @@ public class UIController : MonoBehaviour
 
     [SerializeField] Animator animator;
 
-    public bool TimeOver;
+    public bool TimeOver;   
 
     [SerializeField] private Image uiFill;
     [SerializeField] private TextMeshProUGUI uiText;
 
     public int Duration;
+
+    private int levelNumber;
 
     private int remainingDuration;
 
@@ -58,7 +60,7 @@ public class UIController : MonoBehaviour
         {
             PlayerPrefs.SetInt("TutorialPanel", 1);        
         }
-        if (PlayerPrefs.GetInt("TutorialPanel") == 1)
+        if (PlayerPrefs.GetInt("TutorialPanel") == 1)   
         {
             StartCoroutine(PanelTutorailClose());
         }
@@ -156,7 +158,6 @@ public class UIController : MonoBehaviour
         }
     }
 
-
     //public Vector3 GetIconPosition(Vector3 target)
     //{
     //    Vector3 uýPos = iconTrasform.position;
@@ -166,27 +167,27 @@ public class UIController : MonoBehaviour
     //    return result;
     //}
 
-
     private void Being(int Second)
     {
-        remainingDuration = Second;
-        StartCoroutine(UpdateTimer());
+       remainingDuration = Second;
+       StartCoroutine(UpdateTimer());
     }
 
     private IEnumerator UpdateTimer()
     {
-        while (remainingDuration >= 0)
-        {
+            while (remainingDuration >= 0)
+            {
                 uiText.text = $"{remainingDuration / 60:00}:{remainingDuration % 60:00}";
                 uiFill.fillAmount = Mathf.InverseLerp(0, Duration, remainingDuration);
                 remainingDuration--;
+
             if (remainingDuration == 3)
             {
-                AudioManager.Instance.PlaySFX("Last4Sec");
+                    AudioManager.Instance.PlaySFX("Last4Sec");
             }
-            
                 yield return new WaitForSeconds(1f);
-        }
+            } 
+
         OnEnd();
     }
 
@@ -197,11 +198,19 @@ public class UIController : MonoBehaviour
         AudioManager.Instance.PlaySFX("Win");
         TimeOver = true;
         Time.timeScale = 0;
+        levelNumber += 1;
     }
 
     public void NextLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        if (levelNumber < 7)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + levelNumber);
+        }
+        else
+        {
+            
+        }
     }
 
     public void PreviousLevel()
