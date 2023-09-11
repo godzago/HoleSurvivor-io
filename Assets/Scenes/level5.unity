@@ -131,6 +131,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5180584, guid: b78a5bf80885b564280206c27f438fb9, type: 3}
+      propertyPath: vibrato
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5180584, guid: b78a5bf80885b564280206c27f438fb9, type: 3}
+      propertyPath: duraiton
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5180584, guid: b78a5bf80885b564280206c27f438fb9, type: 3}
+      propertyPath: strenght
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5180584, guid: b78a5bf80885b564280206c27f438fb9, type: 3}
       propertyPath: GoldPanel
       value: 
       objectReference: {fileID: 6426563230910464750}
@@ -138,6 +150,10 @@ PrefabInstance:
       propertyPath: ScoreText
       value: 
       objectReference: {fileID: 1010958507}
+    - target: {fileID: 5180584, guid: b78a5bf80885b564280206c27f438fb9, type: 3}
+      propertyPath: randomness
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 5180584, guid: b78a5bf80885b564280206c27f438fb9, type: 3}
       propertyPath: uIController
       value: 
@@ -20467,7 +20483,6 @@ MonoBehaviour:
   animator: {fileID: 772568116}
   TimeOver: 0
   uiFill: {fileID: 1749188498}
-  TimmerObject: {fileID: 0}
   uiText: {fileID: 1827510019}
   Duration: 40
   TutorialPanelObject: {fileID: 0}

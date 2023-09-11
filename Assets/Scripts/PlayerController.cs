@@ -6,21 +6,27 @@ using TMPro;
 using UnityEngine.UI;
 using DG.Tweening;
 
-public class EnemyObscatial : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
-    [SerializeField] UIController uIController;
-
     int money = 10;
-    [SerializeField] TextMeshProUGUI ScoreText;
 
+    [SerializeField] TextMeshProUGUI ScoreText;
     [SerializeField] GameObject MoneyUIPrefeb;
     [SerializeField] GameObject GoldPanel;
-
     [SerializeField] GameObject MoneyPrefeb;
-
     [SerializeField] ParticleSystem ParticleSystem;
 
-    [SerializeField] Rigidbody rgb;
+    [Header("Scripts")]
+    [SerializeField] UIController uIController;
+
+    [Header("DOTWeen Settings")]
+    [SerializeField] private float duraiton;
+    [SerializeField] private float strenght;
+    [SerializeField] private int vibrato;
+    [SerializeField] private float randomness;
+
+    private Rigidbody rgb;
+
 
     private void Awake()
     {
@@ -28,12 +34,14 @@ public class EnemyObscatial : MonoBehaviour
         {
             PlayerPrefs.SetInt("coins", 0);
         }
+
+        rgb = GetComponent<Rigidbody>();
     }
     private void Start()
     {
         money = PlayerPrefs.GetInt("coins");
     }
-    private void LateUpdate()
+    private void FixedUpdate()
     {
         if (money < 0)
         {
@@ -67,8 +75,8 @@ public class EnemyObscatial : MonoBehaviour
         {
             Vector3 valueDistance = collision.transform.position - gameObject.transform.position;
             float valueZ = Random.Range(-1f, 1f);
-
-            gameObject.transform.DOMove(transform.position + new Vector3(valueZ, 0 , valueZ), 0.3f);            
+            gameObject.transform.DOShakeScale(duraiton, strenght, vibrato, randomness);
+            gameObject.transform.DOMove(transform.position + new Vector3(valueZ, 0 , valueZ), 0.3f);
         }
     }  
 

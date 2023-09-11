@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class SceneManagerNew : MonoBehaviour
+public class SceneController : MonoBehaviour
 {
-    private static SceneManagerNew instance;
-    public static SceneManagerNew Instance { get { return instance; } }
+    private static SceneController instance;
+    public static SceneController Instance { get { return instance; } }
 
     [SerializeField] private Button nextButton;
     [SerializeField] private Button downButton;

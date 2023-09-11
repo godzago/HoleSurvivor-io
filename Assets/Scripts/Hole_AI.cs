@@ -2,26 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+[RequireComponent(typeof(NavMeshAgent))]
 
 public class Hole_AI : MonoBehaviour
 {
-    public float minX = -6f; // AI'nýn sol sýnýrý
-    public float maxX = 6f; // AI'nýn sað sýnýrý
-    public float minZ = -6f; // AI'nýn alt sýnýrý
-    public float maxZ = 6f; // AI'nýn üst sýnýrý
+    public float minX = -6f;
+    public float maxX = 6f;
+    public float minZ = -6f;
+    public float maxZ = 6f;
 
-    private NavMeshAgent navMeshAgent; // AI'nýn NavMeshAgent bileþeni
-
+    private NavMeshAgent navMeshAgent;
+    private HoleManager holeManager;
 
     void Start()
     {
-        // NavMeshAgent bileþenini al
         navMeshAgent = GetComponent<NavMeshAgent>();
+        holeManager = GameObject.Find("HoleDestroyed").GetComponent<HoleManager>();
     }
 
     void Update()
     {
-        // Eðer hedefe ulaþýlmýþsa yeni hedef belirle
         if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.5f && PlayerPrefs.GetInt("GameStart") == 1)
         {
             SetRandomDestination();
@@ -30,10 +30,14 @@ public class Hole_AI : MonoBehaviour
 
     void SetRandomDestination()
     {
-        // Rastgele bir hedef belirle
-        Vector3 randomDestination = new Vector3(Random.Range(minX, maxX), 0f, Random.Range(minZ, maxZ));
-
-        // Hedefi ayarla
-        navMeshAgent.SetDestination(randomDestination);
+        if (holeManager.GameOver == false)
+        {
+            Vector3 randomDestination = new Vector3(Random.Range(minX, maxX), 0f, Random.Range(minZ, maxZ));
+            navMeshAgent.SetDestination(randomDestination);
+        }
+        else
+        {
+            navMeshAgent.speed = 0;
+        }
     }
 }

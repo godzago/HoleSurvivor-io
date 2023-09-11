@@ -170,26 +170,26 @@ public class UIController : MonoBehaviour
     private void Being(int Second)
     {
        remainingDuration = Second;
-       StartCoroutine(UpdateTimer());
+       //StartCoroutine(UpdateTimer());
     }
 
-    private IEnumerator UpdateTimer()
-    {
-            while (remainingDuration >= 0)
-            {
-                uiText.text = $"{remainingDuration / 60:00}:{remainingDuration % 60:00}";
-                uiFill.fillAmount = Mathf.InverseLerp(0, Duration, remainingDuration);
-                remainingDuration--;
+    //private IEnumerator UpdateTimer()
+    //{
+    //        while (remainingDuration >= 0)
+    //        {
+    //            uiText.text = $"{remainingDuration / 60:00}:{remainingDuration % 60:00}";
+    //            uiFill.fillAmount = Mathf.InverseLerp(0, Duration, remainingDuration);
+    //            remainingDuration--;
 
-            if (remainingDuration == 3)
-            {
-                    AudioManager.Instance.PlaySFX("Last4Sec");
-            }
-                yield return new WaitForSeconds(1f);
-            } 
+    //        if (remainingDuration == 3)
+    //        {
+    //            AudioManager.Instance.PlaySFX("Last4Sec");
+    //        }
+    //            yield return new WaitForSeconds(1f);
+    //        } 
 
-        OnEnd();
-    }
+    //    OnEnd();
+    //}
 
     private void OnEnd()
     {

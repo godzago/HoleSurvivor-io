@@ -1,36 +1,34 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-[RequireComponent(typeof(NavMeshAgent))]
+    
 
 public class Enemy_AI : MonoBehaviour
 {
-    public float minX = -6f; // AI'nýn sol sýnýrý
-    public float maxX = 6f; // AI'nýn sað sýnýrý
-    public float minZ = -6f; // AI'nýn alt sýnýrý
-    public float maxZ = 6f; // AI'nýn üst sýnýrý
+    public float minX = -6f;
+    public float maxX = 6f;
+    public float minZ = -6f; 
+    public float maxZ = 6f;
 
-    private NavMeshAgent navMeshAgent; // AI'nýn NavMeshAgent bileþeni
-    private Animator animator;
+    private NavMeshAgent navMeshAgent;
+    [Header("Scripts")]
+    [SerializeField] HoleManager holeManager;
     bool IamIdleNow = true;
 
-    void Start()
+    private void Awake()
     {
-        // NavMeshAgent bileþenini al
         navMeshAgent = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>();
+        holeManager = GameObject.Find("HoleDestroyed").GetComponent<HoleManager>();
     }
 
     void Update()
     {
-
-        if (Input.GetMouseButtonDown(0))
+        if (PlayerPrefs.GetInt("GameStart") == 1)
         {
             IamIdleNow = false;
         }
-
-        // Eðer hedefe ulaþýlmýþsa yeni hedef belirle
+        // eÄŸer hedefe ulaÅŸmÄ±sa yeni hedef belirle
         if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.5f && PlayerPrefs.GetInt("GameStart") == 1)
         {
             SetRandomDestination();
@@ -39,28 +37,13 @@ public class Enemy_AI : MonoBehaviour
 
     void SetRandomDestination()
     {
-        if (IamIdleNow == false)
+        if (IamIdleNow == false && holeManager.GameOver == false)
         {
             // Rastgele bir hedef belirle
             Vector3 randomDestination = new Vector3(Random.Range(minX, maxX), 0f, Random.Range(minZ, maxZ));
 
             // Hedefi ayarla
             navMeshAgent.SetDestination(randomDestination);
-        }
-        else
-        {
-
-        }     
+        }   
     }
-
-    void AnimationOpen()
-    {
-        animator.SetBool("IdleOn", true);
-    }
-
-    void AnimationClose()
-    {
-        animator.SetBool("IdleOn", false);
-    }
-
 }
