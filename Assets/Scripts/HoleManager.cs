@@ -66,6 +66,7 @@ public class HoleManager : MonoBehaviour
         AudioManager.Instance.musicSource.Stop();
         AudioManager.Instance.PlaySFX("Lose");
         Time.timeScale = 0;
+        Debug.Log("Lose");
     }
 
     IEnumerator WinPanel(float t)
@@ -73,6 +74,6 @@ public class HoleManager : MonoBehaviour
         yield return new WaitForSeconds(t);
         uIController.WinPanel.SetActive(true);
         GameOver = true;
-        Debug.Log("WİN");
+        Debug.Log("Win");
     }
 }

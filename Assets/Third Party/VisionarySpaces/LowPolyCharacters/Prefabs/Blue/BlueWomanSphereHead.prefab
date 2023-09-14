@@ -2162,9 +2162,9 @@ GameObject:
   - component: {fileID: 8988615939022352885}
   - component: {fileID: 8107157606578535023}
   - component: {fileID: 7320666873702566844}
-  - component: {fileID: 3828115132380087228}
   - component: {fileID: 484941892}
   - component: {fileID: 898398066}
+  - component: {fileID: 3828115132380087228}
   m_Layer: 0
   m_Name: BlueWomanSphereHead
   m_TagString: EnemyAI
@@ -2231,22 +2231,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &3828115132380087228
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8644142981523647311}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8c0dd8193ab0e846988e8e84a92cef3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minX: -6
-  maxX: 6
-  minZ: -6
-  maxZ: 6
 --- !u!65 &484941892
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2276,6 +2260,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 36
   m_CollisionDetection: 0
+--- !u!114 &3828115132380087228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8644142981523647311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8c0dd8193ab0e846988e8e84a92cef3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minX: -6
+  maxX: 6
+  minZ: -6
+  maxZ: 6
+  holeManager: {fileID: 0}
 --- !u!1 &9116541922897643331
 GameObject:
   m_ObjectHideFlags: 0

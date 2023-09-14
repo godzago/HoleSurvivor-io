@@ -6,13 +6,13 @@ using UnityEngine.AI;
 
 public class Hole_AI : MonoBehaviour
 {
-    public float minX = -6f;
-    public float maxX = 6f;
-    public float minZ = -6f;
-    public float maxZ = 6f;
+    [SerializeField] float minX = -6f;
+    [SerializeField] float maxX = 6f;
+    [SerializeField] float minZ = -6f;
+    [SerializeField] float maxZ = 6f;
 
-    private NavMeshAgent navMeshAgent;
-    private HoleManager holeManager;
+    NavMeshAgent navMeshAgent;
+    HoleManager holeManager;
 
     void Start()
     {

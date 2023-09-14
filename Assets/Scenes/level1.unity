@@ -825,6 +825,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3828115132380087228, guid: 2145dca92ad17f741b3c933ec7381d8e, type: 3}
+      propertyPath: holeManager
+      value: 
+      objectReference: {fileID: 1603670748}
     - target: {fileID: 8644142981523647311, guid: 2145dca92ad17f741b3c933ec7381d8e, type: 3}
       propertyPath: m_Name
       value: BlueWomanSphereHead
@@ -1698,6 +1702,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlueWomanSlim
       objectReference: {fileID: 0}
+    - target: {fileID: 8708574491432375746, guid: 83bfced82f4ca864a95ee6d5444ad816, type: 3}
+      propertyPath: holeManager
+      value: 
+      objectReference: {fileID: 1603670748}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83bfced82f4ca864a95ee6d5444ad816, type: 3}
 --- !u!199 &845992907
@@ -16163,7 +16171,7 @@ GameObject:
   - component: {fileID: 917403427}
   - component: {fileID: 917403428}
   m_Layer: 0
-  m_Name: Arrow
+  m_Name: ArrowAnimation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16258,7 +16266,7 @@ Camera:
     height: 1
   near clip plane: 2
   far clip plane: 250
-  field of view: 100
+  field of view: 95
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -16571,6 +16579,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6380356483670263403, guid: 9a283513b46aec54e868c1ff32202fc1, type: 3}
+      propertyPath: holeManager
+      value: 
+      objectReference: {fileID: 1603670748}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a283513b46aec54e868c1ff32202fc1, type: 3}
 --- !u!1 &1050916084
@@ -17242,6 +17254,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 88fa78abe577d1842b89856a0bb3397b, type: 3}
       propertyPath: m_Name
       value: untitled
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 88fa78abe577d1842b89856a0bb3397b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 88fa78abe577d1842b89856a0bb3397b, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88fa78abe577d1842b89856a0bb3397b, type: 3}
@@ -17918,7 +17938,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
