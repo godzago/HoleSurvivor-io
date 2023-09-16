@@ -21,6 +21,10 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    private void Start()
+    {
+        PlayMusic("Theme");
+    }
 
     public void PlayMusic(string name)
     {
@@ -50,5 +54,4 @@ public class AudioManager : MonoBehaviour
             sfxSource.PlayOneShot(s.clip);
         }
     }
-
 }

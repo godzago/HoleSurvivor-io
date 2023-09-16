@@ -6,57 +6,45 @@ using UnityEngine.UI;
 
 public class SceneController : MonoBehaviour
 {
-    private static SceneController instance;
-    public static SceneController Instance { get { return instance; } }
-
     [SerializeField] private Button nextButton;
     [SerializeField] private Button downButton;
+    [SerializeField] private Button restartButton;
 
-    public static int sceneNumber = 1;
+    public static int sceneNumber = 0;
 
-    private void Awake()
+    private void Start()
     {
-        DontDestroyOnLoad(this.gameObject);
-
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-    void Start()
-    {
-        if (nextButton != null)
-        {
-            nextButton.onClick.AddListener(NextLevel);
-        }
-        if (downButton != null)
-        {
-            downButton.onClick.AddListener(DownLevel);
-        }
+        Debug.Log("" + sceneNumber);
     }
 
     public void NextLevel()
     {
-        if (sceneNumber < 7)
+        sceneNumber += 1;
+
+        Debug.Log("" + sceneNumber);
+
+        if (sceneNumber <= 7)
         {
-            Debug.Log("" + sceneNumber);
+            SceneManager.LoadScene(sceneNumber);
         }
         else
         {
-            sceneNumber = Random.Range(1, 7);
+            SceneManager.LoadScene(Random.Range(1, 7));
         }
-
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + sceneNumber);
     }
 
     public void DownLevel()
     {
         sceneNumber -= 1;
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + sceneNumber);
+        Debug.Log("" + sceneNumber);
+
+        SceneManager.LoadScene(sceneNumber);
     }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
 }

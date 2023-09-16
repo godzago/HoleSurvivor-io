@@ -19,9 +19,8 @@ public class HoleManager : MonoBehaviour
 
     private void Awake()
     {
-        AudioManager.Instance.PlayMusic("Theme");
-
         Time.timeScale = 1;
+
 
         if (PlayerPrefs.HasKey(nameof(GameStart)) == false)
         {
@@ -72,7 +71,7 @@ public class HoleManager : MonoBehaviour
     IEnumerator WinPanel(float t)
     {
         yield return new WaitForSeconds(t);
-        uIController.WinPanel.SetActive(true);
+        uIController.OnEnd();
         GameOver = true;
         Debug.Log("Win");
     }

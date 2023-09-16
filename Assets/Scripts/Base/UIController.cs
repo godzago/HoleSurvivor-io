@@ -4,9 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
-using System;
 using UnityEngine.SceneManagement;
-
+using System;
 
 public class UIController : MonoBehaviour
 {
@@ -36,8 +35,6 @@ public class UIController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI uiText;
 
     public int Duration;
-
-    private int levelNumber;
 
     private int remainingDuration;
 
@@ -191,35 +188,38 @@ public class UIController : MonoBehaviour
     //    OnEnd();
     //}
 
-    private void OnEnd()
+    public void OnEnd()
     {
         WinPanel.SetActive(true);
         AudioManager.Instance.musicSource.Stop();
         AudioManager.Instance.PlaySFX("Win");
         TimeOver = true;
         Time.timeScale = 0;
-        levelNumber += 1;
     }
 
-    public void NextLevel()
-    {
-        if (levelNumber < 7)
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + levelNumber);
-        }
-        else
-        {
-            
-        }
-    }
+    //public void NextLevel()
+    //{
+    //    SceneController.sceneNumber += 1;
 
-    public void PreviousLevel()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + -1);
-    }
+    //    if (SceneController.sceneNumber <= 7)
+    //    {
+    //        SceneManager.LoadScene(SceneController.sceneNumber);
+    //    }
+    //    else
+    //    {
+    //        SceneManager.LoadScene(UnityEngine.Random.Range(1, 7));
+    //    }
+    //}
 
-    public void RestartGame()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
+    //public void PreviousLevel()
+    //{
+    //    SceneController.sceneNumber -= 1;
+
+    //    SceneManager.LoadScene(SceneController.sceneNumber);
+    //}
+
+    //public void RestartGame()
+    //{
+    //    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    //}
 }
