@@ -5,12 +5,13 @@ using TMPro;
 public class CoundDownController : MonoBehaviour
 {
     [Header("Timmer")]
-    public int countDownTime;
-    public GameObject countDownTimeObject;
-    public TextMeshProUGUI countDownDisplay;
+    [SerializeField] int countDownTime;
+    [SerializeField] GameObject countDownTimeObject;
+    [SerializeField] TextMeshProUGUI countDownDisplay;
 
     [Header("Tutorial")]
-    public GameObject bigArrow;
+    [SerializeField] GameObject bigArrow;
+    //public GameObject bigArrowPortal;
 
     private void Awake()
     {
@@ -23,6 +24,7 @@ public class CoundDownController : MonoBehaviour
         {
             countDownTimeObject.SetActive(false);
             bigArrow.SetActive(false);
+            //bigArrowPortal.SetActive(false);
         }
     }
 
@@ -50,5 +52,6 @@ public class CoundDownController : MonoBehaviour
     {
         yield return new WaitForSeconds(t);
         bigArrow.SetActive(false);
+        //bigArrowPortal.SetActive(false);
     }
 }

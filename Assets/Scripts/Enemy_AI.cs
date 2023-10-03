@@ -15,6 +15,7 @@ public class Enemy_AI : MonoBehaviour
 
     [Header("Scripts")]
     [SerializeField] HoleManager holeManager;
+
     bool IamIdleNow = true;
 
     private void Awake()
@@ -35,7 +36,6 @@ public class Enemy_AI : MonoBehaviour
             SetRandomDestination();
         }
     }
-
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log("Collison Enter");

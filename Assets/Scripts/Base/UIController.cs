@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,10 +6,8 @@ using TMPro;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
 using System;
-
 public class UIController : MonoBehaviour
 {
-
     public static UIController Instance; 
 
     [SerializeField] public GameObject WinPanel, LosePanel, InGamePanel;
@@ -40,6 +38,9 @@ public class UIController : MonoBehaviour
 
     public GameObject TutorialPanelObject;
 
+    private PlayerController playerController;
+
+    public int TotalMoney { get; private set; }
 
     private void Awake()
     {
@@ -52,7 +53,9 @@ public class UIController : MonoBehaviour
     private void Start()
     {
         Being(Duration);
-        //animator.SetTrigger("close");
+
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+
         if (PlayerPrefs.HasKey("TutorialPanel") == false)
         {
             PlayerPrefs.SetInt("TutorialPanel", 1);        
@@ -155,12 +158,14 @@ public class UIController : MonoBehaviour
         }
     }
 
+    // farklı bir coin gönderme efekti
+
     //public Vector3 GetIconPosition(Vector3 target)
     //{
-    //    Vector3 u�Pos = iconTrasform.position;
-    //    u�Pos.z = (target - mainCamera.transform.position).z;
+    //    Vector3 uýPos = iconTrasform.position;
+    //    uýPos.z = (target - mainCamera.transform.position).z;
 
-    //    Vector3 result = mainCamera.ScreenToWorldPoint(u�Pos);
+    //    Vector3 result = mainCamera.ScreenToWorldPoint(uýPos);
     //    return result;
     //}
 
@@ -193,6 +198,7 @@ public class UIController : MonoBehaviour
         WinPanel.SetActive(true);
         AudioManager.Instance.musicSource.Stop();
         AudioManager.Instance.PlaySFX("Win");
+        playerController.SaveMoneyData(TotalMoney);
         TimeOver = true;
         Time.timeScale = 0;
     }

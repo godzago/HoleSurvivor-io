@@ -7,12 +7,13 @@ using DG.Tweening;
 
 public class HoleManager : MonoBehaviour
 {
+    [Header("Game Bool")]
     public bool GameOver = false;
 
     [Header("Scripts")]
     [SerializeField] UIController uIController;
 
-    public GameObject[] EnemyNumber;
+    private GameObject[] EnemyNumber;
 
     int enemyCount;
     int GameStart;
@@ -21,33 +22,34 @@ public class HoleManager : MonoBehaviour
     {
         Time.timeScale = 1;
 
-
         if (PlayerPrefs.HasKey(nameof(GameStart)) == false)
         {
             PlayerPrefs.SetInt(nameof(GameStart), 0);
         }
     }
-    private void Start()
-    {
-        EnemyNumber = GameObject.FindGameObjectsWithTag("EnemyAI");
 
-        enemyCount = EnemyNumber.Length;
-    }
+    //private void Start()
+    //{
+    //    EnemyNumber = GameObject.FindGameObjectsWithTag("EnemyAI");
 
-    private void LateUpdate()
-    {
-         if (enemyCount <= 0)
-         {
-            StartCoroutine(WinPanel(1.5f));
-         }
-    }
+    //    enemyCount = EnemyNumber.Length;
+    //}
+
+    //private void LateUpdate()
+    //{
+    //     if (enemyCount <= 0)
+    //     {
+    //        StartCoroutine(WinPanel(1.5f));
+    //     }
+    //}
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("EnemyAI"))
         {
-            other.gameObject.GetComponent<NavMeshAgent>().transform.DOMove(new Vector3(transform.position.x, transform.position.y - 5, transform.position.z), 1.5f).OnComplete(() => Destroy(other.gameObject));
-            enemyCount += -1;
+            other.gameObject.GetComponent<NavMeshAgent>().transform.DOMove(new Vector3(transform.position.x, transform.position.y - 5, transform.position.z), 1.5f);
+            //.OnComplete(() => Destroy(other.gameObject));
+            //enemyCount += -1;
         }
         
         if (other.gameObject.CompareTag("Player"))
@@ -68,7 +70,7 @@ public class HoleManager : MonoBehaviour
         Debug.Log("Lose");
     }
 
-    IEnumerator WinPanel(float t)
+    public IEnumerator WinPanel(float t)
     {
         yield return new WaitForSeconds(t);
         uIController.OnEnd();

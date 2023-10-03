@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -8,8 +8,6 @@ using DG.Tweening;
 
 public class PlayerController : MonoBehaviour
 {
-    int money = 10;
-
     [SerializeField] TextMeshProUGUI ScoreText;
     [SerializeField] GameObject MoneyUIPrefeb;
     [SerializeField] GameObject GoldPanel;
@@ -18,6 +16,8 @@ public class PlayerController : MonoBehaviour
 
     [Header("Scripts")]
     [SerializeField] UIController uIController;
+    private HoleManager holeManagar;
+    private MoneyCollect moneyCollect;
 
     [Header("DOTWeen Settings")]
     [SerializeField] private float duraiton;
@@ -27,6 +27,15 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody rgb;
 
+    [Header("Processin Area ")]
+    [SerializeField] GameObject portalObject;
+    [SerializeField] Slider processingBar;
+    [SerializeField] GameObject portalArrow;
+
+    [SerializeField] private int maxHealth;
+    [SerializeField] private TextMeshProUGUI text;
+
+    int money = 10;
 
     private void Awake()
     {
@@ -34,18 +43,37 @@ public class PlayerController : MonoBehaviour
         {
             PlayerPrefs.SetInt("coins", 0);
         }
+        if (PlayerPrefs.HasKey("PortalArrow") == false)
+        {
+            PlayerPrefs.SetInt("PortalArrow", 0);
+        }
 
         rgb = GetComponent<Rigidbody>();
+
+        holeManagar = GameObject.Find("HoleDestroyed").GetComponent<HoleManager>();
+
+        moneyCollect = GetComponent<MoneyCollect>();
     }
     private void Start()
     {
-        money = PlayerPrefs.GetInt("coins");
+        LevelCase(SceneController.sceneNumber);
+        Debug.Log("" + maxHealth);
+        //money = PlayerPrefs.GetInt("coins");
+        processingBar.maxValue = maxHealth;
+        TextToStirng();
     }
+
     private void FixedUpdate()
     {
         if (money < 0)
         {
+            Debug.Log("Loss");
             uIController.LosePanel.SetActive(true);            
+        }
+        else if (money > maxHealth)
+        {
+            Debug.Log("Win");
+            //holeManagar.StartCoroutine("WinPanel" , 1f);
         }
     }
 
@@ -53,11 +81,49 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Money"))
         {
-            AddCountCoins(+10);
-            other.gameObject.SetActive(false);
+            other.gameObject.GetComponent<BoxCollider>().enabled = false;
+            AddCountCoins(+15);
             StartCoroutine(ActivateAfterDelay(3));
-            Instantiate(MoneyUIPrefeb, Camera.main.WorldToScreenPoint(transform.position), GoldPanel.transform.rotation, GoldPanel.transform);
             AudioManager.Instance.PlaySFX("Coin");
+            
+            //other.gameObject.SetActive(false);
+        }
+
+        if (other.gameObject.CompareTag("portal") && money >=100)
+        {
+            this.gameObject.SetActive(false);
+            holeManagar.StartCoroutine("WinPanel", 1f);
+        }
+
+        if (other.gameObject.CompareTag("MoneyHolder"))
+        {
+            foreach (var item in moneyCollect.stackedMoney)
+            {
+                item.parent = null;
+                item.DOMove(other.transform.position, 0.5f).OnComplete(() => item.gameObject.SetActive(false));
+                //Instantiate(MoneyUIPrefeb, Camera.main.WorldToScreenPoint(transform.position), GoldPanel.transform.rotation, GoldPanel.transform);
+                TextToStirng();                   
+            }
+
+            SliderSettings();
+
+            moneyCollect.stackedMoney.Clear();
+            moneyCollect.NumOfItemsHolding = 0;
+
+            // bu if win olup olmadığını kontrol ediyor ve  arrow animasyonunu kontorle edşyor
+            if (money >= maxHealth)
+            {              
+                portalObject.SetActive(true);
+                if (PlayerPrefs.GetInt("PortalArrow") == 0)
+                {
+                    PlayerPrefs.SetInt("PortalArrow", 2);
+                    StartCoroutine(PortalArrow(25f));
+                }
+                else
+                {
+                    portalArrow.SetActive(false);
+                }
+            }
         }
     }
 
@@ -66,6 +132,8 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("EnemyObscatial"))
         {
             AddCountCoins(-15);
+            TextToStirng();
+            SliderSettings();   
             Camera.main.GetComponent<Shake>().StartShake();           
             ParticleSystem.Play();
             Invoke("StopParticleSystem", 0.5f);
@@ -84,12 +152,32 @@ public class PlayerController : MonoBehaviour
     {
         ParticleSystem.Stop();
     }
+    void SliderSettings()
+    {
+        //float currnetScore = Mathf.SmoothDamp(processingBar.value, money, ref currnetVelecotiy, 50 * Time.deltaTime);
+        processingBar.value = money;
+    }
 
     public void AddCountCoins(int amount)
     {
         money += amount;
+        //ScoreText.text = money.ToString();
+        //PlayerPrefs.SetInt("coins", money);
+    }
+    public void TextToStirng()
+    {
         ScoreText.text = money.ToString();
-        PlayerPrefs.SetInt("coins", money);
+        text.text = money + "/" + maxHealth;
+    }  
+    public void SaveMoneyData(int TotalMoney)
+    {
+        money += TotalMoney;
+        PlayerPrefs.SetInt("coins", TotalMoney);
+    }   
+    IEnumerator PortalArrow(float t)
+    {
+        yield return new WaitForSeconds(t);
+        portalArrow.SetActive(false);
     }
 
     IEnumerator ActivateAfterDelay(float delay)
@@ -99,6 +187,39 @@ public class PlayerController : MonoBehaviour
         Vector3 spawnPosition = new Vector3(Random.Range(-4, 4), Random.Range(0, 0), Random.Range(-4, 4));
 
         Instantiate(MoneyPrefeb, spawnPosition, Quaternion.identity);
+    }
+
+    void LevelCase(int levelCount)
+    {
+        SceneController.sceneNumber = levelCount;
+
+        switch (levelCount)
+        {
+            case 0:
+                maxHealth = 100;
+                break;
+            case 1:
+                maxHealth = 125;
+                break;
+            case 2:
+                maxHealth = 150;
+                break;
+            case 3:
+                maxHealth = 175;
+                break;
+            case 4:
+                maxHealth = 200;
+                break;
+            case 5:
+                maxHealth = 225;
+                break;
+            case 6:
+                maxHealth = 250;
+                break;
+            case 7:
+                maxHealth = 300;
+                break;
+        }
     }
 }
 
