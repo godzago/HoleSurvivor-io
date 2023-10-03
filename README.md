@@ -1,14 +1,12 @@
-# HoleRun
+# HoleSurvivor 3D
 
 In this project, I wanted to experiment with the concept of the "hole" mechanic and approached it from a different perspective.
 
 Game play video : https://youtu.be/Lxw91_UgQWs
 
 
+![1](https://github.com/godzago/HoleRun/assets/48593494/fbe17381-e056-45fe-ad20-861067ffc542)
+
+![2](https://github.com/godzago/HoleRun/assets/48593494/c2dea8ab-973f-44ae-aedc-a2e66f70258a)
 
 
-![image](https://github.com/godzago/HoleRun/assets/48593494/b8b71aed-0580-4145-b45e-05264d17b980)
-
-![image](https://github.com/godzago/HoleRun/assets/48593494/0ec11806-1dac-4f17-bafb-b6e2f01233a0)
-
-![image](https://github.com/godzago/HoleRun/assets/48593494/9d948c58-eed1-4644-aa72-d6486fa8c819)
