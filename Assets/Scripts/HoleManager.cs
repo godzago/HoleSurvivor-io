@@ -13,9 +13,9 @@ public class HoleManager : MonoBehaviour
     [Header("Scripts")]
     [SerializeField] UIController uIController;
 
-    private GameObject[] EnemyNumber;
+    //private GameObject[] EnemyNumber;
+    //int enemyCount;
 
-    int enemyCount;
     int GameStart;
 
     private void Awake()
