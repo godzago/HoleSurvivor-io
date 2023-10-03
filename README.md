@@ -2,7 +2,7 @@
 
 In this project, I wanted to experiment with the concept of the "hole" mechanic and approached it from a different perspective.
 
-Game play video : https://youtu.be/Lxw91_UgQWs
+Game play video : https://www.youtube.com/watch?v=0ZKDO9Q7cVw&feature=youtu.be
 
 
 ![1](https://github.com/godzago/HoleRun/assets/48593494/fbe17381-e056-45fe-ad20-861067ffc542)
