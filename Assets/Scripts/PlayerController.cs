@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Slider processingBar;
     [SerializeField] GameObject portalArrow;
 
-    [SerializeField] private int maxHealth;
+    [SerializeField] [HideInInspector] private int maxHealth;
     [SerializeField] private TextMeshProUGUI text;
 
     int money = 10;

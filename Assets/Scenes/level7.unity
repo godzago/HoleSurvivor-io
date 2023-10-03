@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.013576799, g: 0.49957746, b: 0.7923773, a: 1}
+  m_IndirectSpecularColor: {r: 0.01357688, g: 0.49957752, b: 0.7923774, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -130,6 +130,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5180584, guid: b78a5bf80885b564280206c27f438fb9, type: 3}
+      propertyPath: text
+      value: 
+      objectReference: {fileID: 1705420214}
     - target: {fileID: 5180584, guid: b78a5bf80885b564280206c27f438fb9, type: 3}
       propertyPath: GoldPanel
       value: 
@@ -20080,6 +20084,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1705420214 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1445319186, guid: e8fa2b95433e8f649ba9bbb4e3f51511, type: 3}
+  m_PrefabInstance: {fileID: 1705420211}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1708969587
