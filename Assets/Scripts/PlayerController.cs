@@ -25,8 +25,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int vibrato;
     [SerializeField] private float randomness;
 
-    private Rigidbody rgb;
-
     [Header("Processin Area ")]
     [SerializeField] GameObject portalObject;
     [SerializeField] Slider processingBar;
@@ -36,6 +34,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI text;
 
     int money = 10;
+    private Rigidbody rgb;
 
     private void Awake()
     {

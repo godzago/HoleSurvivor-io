@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.013576799, g: 0.49957746, b: 0.7923773, a: 1}
+  m_IndirectSpecularColor: {r: 0.01357688, g: 0.49957752, b: 0.7923774, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -142,6 +142,10 @@ PrefabInstance:
       propertyPath: ScoreText
       value: 
       objectReference: {fileID: 1010958507}
+    - target: {fileID: 5180584, guid: b78a5bf80885b564280206c27f438fb9, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5180584, guid: b78a5bf80885b564280206c27f438fb9, type: 3}
       propertyPath: portalArrow
       value: 
@@ -17512,7 +17516,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1399103449
 RectTransform:
   m_ObjectHideFlags: 0

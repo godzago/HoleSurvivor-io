@@ -5,7 +5,8 @@ using DG.Tweening;
 
 public class MoneyCollect : MonoBehaviour
 {
-    [SerializeField] private Transform ItemHolderTrasnform;
+    [Header("Stack Trasfrom")]
+    [SerializeField] Transform ItemHolderTrasnform;
     [SerializeField] Transform holderTrasnfrom;
 
     public int NumOfItemsHolding = 0;
