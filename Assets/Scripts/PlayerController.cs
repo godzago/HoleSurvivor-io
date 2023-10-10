@@ -188,6 +188,7 @@ public class PlayerController : MonoBehaviour
         Instantiate(MoneyPrefeb, spawnPosition, Quaternion.identity);
     }
 
+
     void LevelCase(int levelCount)
     {
         SceneController.sceneNumber = levelCount;
