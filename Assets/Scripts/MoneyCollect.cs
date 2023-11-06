@@ -27,7 +27,7 @@ public class MoneyCollect : MonoBehaviour
         }
             );
 
-        Debug.Log("" + NumOfItemsHolding);
+        //Debug.Log("" + NumOfItemsHolding);
 
     }
 }

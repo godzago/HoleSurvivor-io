@@ -11,19 +11,24 @@ public class CoundDownController : MonoBehaviour
 
     [Header("Tutorial")]
     [SerializeField] GameObject bigArrow;
+    [SerializeField] GameObject Menu;
+    [SerializeField] TMP_InputField display;
+    [SerializeField] bool nameEnable = false;
     //public GameObject bigArrowPortal;
 
     private void Awake()
     {
         if (PlayerPrefs.GetInt("GameStart") == 0)
         {
-            StartCoroutine(CoundDownStart(1f));
-            StartCoroutine(BigArrow(2.5f));
+            CreateName();
+            //StartCoroutine(CoundDownStart(1f));
+            //StartCoroutine(BigArrow(2.5f));
         }
         else
         {
             countDownTimeObject.SetActive(false);
             bigArrow.SetActive(false);
+            Menu.SetActive(false);
             //bigArrowPortal.SetActive(false);
         }
     }
@@ -53,5 +58,19 @@ public class CoundDownController : MonoBehaviour
         yield return new WaitForSeconds(t);
         bigArrow.SetActive(false);
         //bigArrowPortal.SetActive(false);
+    }
+
+    public void CreateName()
+    {
+        Menu.SetActive(true); 
+        PlayerPrefs.SetString("user_name", display.text);
+        PlayerPrefs.Save();
+        nameEnable = true;
+    }
+    public void CloseMenu()
+    {
+        Menu.SetActive(false);
+        StartCoroutine(CoundDownStart(1f));
+        StartCoroutine(BigArrow(2.5f));
     }
 }

@@ -14,6 +14,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI moneyText; /*incMoney*/
     [SerializeField] private List<string> moneyMulti = new();
     [SerializeField] private GameObject coin;
+    public GameObject ShopArea;
 
     private Canvas UICanvas;
 
@@ -52,8 +53,9 @@ public class UIController : MonoBehaviour
 
     private void Start()
     {
-        Being(Duration);
+        ShopArea.SetActive(true);
 
+        Being(Duration);
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
 
         if (PlayerPrefs.HasKey("TutorialPanel") == false)
@@ -198,9 +200,10 @@ public class UIController : MonoBehaviour
         WinPanel.SetActive(true);
         AudioManager.Instance.musicSource.Stop();
         AudioManager.Instance.PlaySFX("Win");
-        playerController.SaveMoneyData(TotalMoney);
+        playerController.SaveMoneyData();
         TimeOver = true;
         Time.timeScale = 0;
+        
     }
 
     //public void NextLevel()

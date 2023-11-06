@@ -29,18 +29,21 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject portalObject;
     [SerializeField] Slider processingBar;
     [SerializeField] GameObject portalArrow;
+    private bool isOpenTheGate = false;
 
     [SerializeField] [HideInInspector] private int maxHealth;
     [SerializeField] private TextMeshProUGUI text;
+    [SerializeField] private TextMeshProUGUI mame;
 
-    int money = 10;
+    int money;
+    public int TotalMoney;
     private Rigidbody rgb;
 
     private void Awake()
     {
         if (PlayerPrefs.HasKey("coins") == false)
         {
-            PlayerPrefs.SetInt("coins", 0);
+            PlayerPrefs.SetInt("coins", 175);
         }
         if (PlayerPrefs.HasKey("PortalArrow") == false)
         {
@@ -52,12 +55,14 @@ public class PlayerController : MonoBehaviour
         holeManagar = GameObject.Find("HoleDestroyed").GetComponent<HoleManager>();
 
         moneyCollect = GetComponent<MoneyCollect>();
+
+        TotalMoney = PlayerPrefs.GetInt("coins");
     }
     private void Start()
     {
-        LevelCase(SceneController.sceneNumber);
+        LevelCase(PlayerPrefs.GetInt("sceneNumber"));
         Debug.Log("" + maxHealth);
-        //money = PlayerPrefs.GetInt("coins");
+
         processingBar.maxValue = maxHealth;
         TextToStirng();
     }
@@ -71,7 +76,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (money > maxHealth)
         {
-            Debug.Log("Win");
+            //Debug.Log("Win");
             //holeManagar.StartCoroutine("WinPanel" , 1f);
         }
     }
@@ -80,8 +85,9 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Money"))
         {
+            mame.text = PlayerPrefs.GetString("user_name");
+
             other.gameObject.GetComponent<BoxCollider>().enabled = false;
-            AddCountCoins(+15);
             StartCoroutine(ActivateAfterDelay(3));
             AudioManager.Instance.PlaySFX("Coin");
             
@@ -90,18 +96,20 @@ public class PlayerController : MonoBehaviour
 
         if (other.gameObject.CompareTag("portal") && money >=100)
         {
-            this.gameObject.SetActive(false);
+            this.gameObject.transform.DOMoveY(15, 1f);
             holeManagar.StartCoroutine("WinPanel", 1f);
         }
 
         if (other.gameObject.CompareTag("MoneyHolder"))
         {
+            AddCountCoins(moneyCollect.NumOfItemsHolding * 15);
+            
             foreach (var item in moneyCollect.stackedMoney)
             {
                 item.parent = null;
                 item.DOMove(other.transform.position, 0.5f).OnComplete(() => item.gameObject.SetActive(false));
                 //Instantiate(MoneyUIPrefeb, Camera.main.WorldToScreenPoint(transform.position), GoldPanel.transform.rotation, GoldPanel.transform);
-                TextToStirng();                   
+                TextToStirng();
             }
 
             SliderSettings();
@@ -110,18 +118,24 @@ public class PlayerController : MonoBehaviour
             moneyCollect.NumOfItemsHolding = 0;
 
             // bu if win olup olmadığını kontrol ediyor ve  arrow animasyonunu kontorle edşyor
-            if (money >= maxHealth)
-            {              
+            if (money >= maxHealth && !isOpenTheGate)
+            {
+                TotalMoney -= maxHealth;
+                TextToStirng();
+                Debug.Log("TOTAL GATE MONEY : " + TotalMoney);
                 portalObject.SetActive(true);
                 if (PlayerPrefs.GetInt("PortalArrow") == 0)
                 {
+
                     PlayerPrefs.SetInt("PortalArrow", 2);
                     StartCoroutine(PortalArrow(25f));
+
                 }
                 else
                 {
                     portalArrow.SetActive(false);
                 }
+                isOpenTheGate = true;
             }
         }
     }
@@ -130,7 +144,10 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("EnemyObscatial"))
         {
-            AddCountCoins(-15);
+            if (moneyCollect.NumOfItemsHolding > 0)
+            {
+                moneyCollect.NumOfItemsHolding -= 1;
+            }
             TextToStirng();
             SliderSettings();   
             Camera.main.GetComponent<Shake>().StartShake();           
@@ -160,25 +177,24 @@ public class PlayerController : MonoBehaviour
     public void AddCountCoins(int amount)
     {
         money += amount;
-        //ScoreText.text = money.ToString();
-        //PlayerPrefs.SetInt("coins", money);
+        TotalMoney += amount;
     }
     public void TextToStirng()
     {
-        ScoreText.text = money.ToString();
+
+        ScoreText.text = TotalMoney.ToString();
+
         text.text = money + "/" + maxHealth;
     }  
-    public void SaveMoneyData(int TotalMoney)
+    public void SaveMoneyData()
     {
-        money += TotalMoney;
         PlayerPrefs.SetInt("coins", TotalMoney);
-    }   
+    } 
     IEnumerator PortalArrow(float t)
     {
         yield return new WaitForSeconds(t);
         portalArrow.SetActive(false);
     }
-
     IEnumerator ActivateAfterDelay(float delay)
     {
         yield return new WaitForSeconds(3);
@@ -188,11 +204,8 @@ public class PlayerController : MonoBehaviour
         Instantiate(MoneyPrefeb, spawnPosition, Quaternion.identity);
     }
 
-
     void LevelCase(int levelCount)
     {
-        SceneController.sceneNumber = levelCount;
-
         switch (levelCount)
         {
             case 0:

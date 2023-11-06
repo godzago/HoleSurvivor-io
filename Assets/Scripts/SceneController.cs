@@ -10,22 +10,32 @@ public class SceneController : MonoBehaviour
     [SerializeField] private Button downButton;
     [SerializeField] private Button restartButton;
 
-    public static int sceneNumber = 0;
+    public int sceneNumber;
 
+    private void Awake()
+    {
+        if (PlayerPrefs.HasKey("sceneNumber") == false)
+        {
+            PlayerPrefs.SetInt("sceneNumber", 0);
+        }
+    }
     private void Start()
     {
-        Debug.Log("" + sceneNumber);
+        Debug.Log(PlayerPrefs.GetInt("sceneNumber"));
+        LoadScene();
     }
 
     public void NextLevel()
     {
         sceneNumber += 1;
 
+        PlayerPrefs.SetInt("sceneNumber", sceneNumber);
+
         Debug.Log("" + sceneNumber);
 
         if (sceneNumber <= 7)
         {
-            SceneManager.LoadScene(sceneNumber);
+            SceneManager.LoadScene(PlayerPrefs.GetInt("sceneNumber"));
         }
         else
         {
@@ -39,7 +49,7 @@ public class SceneController : MonoBehaviour
 
         Debug.Log("" + sceneNumber);
 
-        SceneManager.LoadScene(sceneNumber);
+        SceneManager.LoadScene(PlayerPrefs.GetInt("sceneNumber"));
     }
 
     public void RestartGame()
@@ -47,4 +57,8 @@ public class SceneController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    public void LoadScene()
+    {
+        SceneManager.LoadScene(PlayerPrefs.GetInt("sceneNumber"));
+    }
 }

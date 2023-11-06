@@ -38,7 +38,7 @@ public class Enemy_AI : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Collison Enter");
+        //Debug.Log("Collison Enter");
         this.gameObject.transform.DORotate(new Vector3(0, 180, 0), 0.30f, RotateMode.WorldAxisAdd);
     }
 
