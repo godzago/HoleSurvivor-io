@@ -8,7 +8,7 @@ using DG.Tweening;
 public class HoleManager : MonoBehaviour
 {
     [Header("Game Bool")]
-    public bool GameOver = false;
+    [HideInInspector] public bool GameOver = false;
 
     [Header("Scripts")]
     [SerializeField] UIController uIController;
@@ -64,6 +64,7 @@ public class HoleManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         uIController.LosePanel.SetActive(true);
+        uIController.shopButton.interactable = true;
         AudioManager.Instance.musicSource.Stop();
         AudioManager.Instance.PlaySFX("Lose");
         Time.timeScale = 0;
@@ -73,6 +74,7 @@ public class HoleManager : MonoBehaviour
     public IEnumerator WinPanel(float t)
     {
         yield return new WaitForSeconds(t);
+        uIController.shopButton.interactable = true;
         uIController.OnEnd();
         GameOver = true;
         Debug.Log("Win");

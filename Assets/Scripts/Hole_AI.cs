@@ -6,6 +6,7 @@ using UnityEngine.AI;
 
 public class Hole_AI : MonoBehaviour
 {
+    [Header("Area")]
     [SerializeField] float minX = -6f;
     [SerializeField] float maxX = 6f;
     [SerializeField] float minZ = -6f;
@@ -13,7 +14,6 @@ public class Hole_AI : MonoBehaviour
 
     NavMeshAgent navMeshAgent;
     HoleManager holeManager;
-
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -22,7 +22,7 @@ public class Hole_AI : MonoBehaviour
 
     void Update()
     {
-        if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.5f && PlayerPrefs.GetInt("GameStart") == 1)
+        if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.5f && PlayerPrefs.GetInt("GameState") == 1)
         {
             SetRandomDestination();
         }

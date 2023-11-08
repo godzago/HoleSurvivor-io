@@ -8,11 +8,11 @@ using DG.Tweening;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Money Settings")]
     [SerializeField] TextMeshProUGUI ScoreText;
     [SerializeField] GameObject MoneyUIPrefeb;
     [SerializeField] GameObject GoldPanel;
     [SerializeField] GameObject MoneyPrefeb;
-    [SerializeField] ParticleSystem ParticleSystem;
 
     [Header("Scripts")]
     [SerializeField] UIController uIController;
@@ -33,7 +33,6 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] [HideInInspector] private int maxHealth;
     [SerializeField] private TextMeshProUGUI text;
-    [SerializeField] private TextMeshProUGUI mame;
 
     int money;
     public int TotalMoney;
@@ -60,7 +59,8 @@ public class PlayerController : MonoBehaviour
     }
     private void Start()
     {
-        LevelCase(PlayerPrefs.GetInt("sceneNumber"));
+        LevelCase(SceneController.sceneNumber);
+
         Debug.Log("" + maxHealth);
 
         processingBar.maxValue = maxHealth;
@@ -85,8 +85,6 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Money"))
         {
-            mame.text = PlayerPrefs.GetString("user_name");
-
             other.gameObject.GetComponent<BoxCollider>().enabled = false;
             StartCoroutine(ActivateAfterDelay(3));
             AudioManager.Instance.PlaySFX("Coin");
@@ -151,8 +149,6 @@ public class PlayerController : MonoBehaviour
             TextToStirng();
             SliderSettings();   
             Camera.main.GetComponent<Shake>().StartShake();           
-            ParticleSystem.Play();
-            Invoke("StopParticleSystem", 0.5f);
         }
 
         if (collision.gameObject.CompareTag("EnemyAI"))
@@ -164,10 +160,6 @@ public class PlayerController : MonoBehaviour
         }
     }  
 
-    void StopParticleSystem()
-    {
-        ParticleSystem.Stop();
-    }
     void SliderSettings()
     {
         //float currnetScore = Mathf.SmoothDamp(processingBar.value, money, ref currnetVelecotiy, 50 * Time.deltaTime);
@@ -231,6 +223,12 @@ public class PlayerController : MonoBehaviour
                 break;
             case 7:
                 maxHealth = 300;
+                break;
+            case 8:
+                maxHealth = 325;
+                break;
+            case 9:
+                maxHealth = 350;
                 break;
         }
     }

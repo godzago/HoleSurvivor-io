@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 using System;
 public class UIController : MonoBehaviour
 {
-    public static UIController Instance; 
+    public static UIController Instance;
 
     [SerializeField] public GameObject WinPanel, LosePanel, InGamePanel;
     [SerializeField] private TextMeshProUGUI moneyText; /*incMoney*/
@@ -28,7 +28,7 @@ public class UIController : MonoBehaviour
 
     [SerializeField] Animator animator;
 
-    public bool TimeOver;   
+    public bool TimeOver;
 
     [SerializeField] private Image uiFill;
     [SerializeField] private TextMeshProUGUI uiText;
@@ -40,6 +40,8 @@ public class UIController : MonoBehaviour
     public GameObject TutorialPanelObject;
 
     private PlayerController playerController;
+
+    public Button shopButton;
 
     public int TotalMoney { get; private set; }
 
@@ -205,30 +207,4 @@ public class UIController : MonoBehaviour
         Time.timeScale = 0;
         
     }
-
-    //public void NextLevel()
-    //{
-    //    SceneController.sceneNumber += 1;
-
-    //    if (SceneController.sceneNumber <= 7)
-    //    {
-    //        SceneManager.LoadScene(SceneController.sceneNumber);
-    //    }
-    //    else
-    //    {
-    //        SceneManager.LoadScene(UnityEngine.Random.Range(1, 7));
-    //    }
-    //}
-
-    //public void PreviousLevel()
-    //{
-    //    SceneController.sceneNumber -= 1;
-
-    //    SceneManager.LoadScene(SceneController.sceneNumber);
-    //}
-
-    //public void RestartGame()
-    //{
-    //    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    //}
 }

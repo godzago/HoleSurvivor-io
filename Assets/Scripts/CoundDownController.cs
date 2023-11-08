@@ -11,28 +11,42 @@ public class CoundDownController : MonoBehaviour
 
     [Header("Tutorial")]
     [SerializeField] GameObject bigArrow;
-    [SerializeField] GameObject Menu;
     [SerializeField] TMP_InputField display;
-    [SerializeField] bool nameEnable = false;
-    //public GameObject bigArrowPortal;
+
+    [Header("Name")]
+    [SerializeField] GameObject Menu;
+    [HideInInspector] [SerializeField] bool nameEnable = false;
+    [SerializeField] TextMeshProUGUI mame;
+
+    //public GameObject bigArrowPortal
 
     private void Awake()
     {
-        if (PlayerPrefs.GetInt("GameStart") == 0)
+        if (PlayerPrefs.HasKey("GameState") == false)
+        {
+            PlayerPrefs.SetInt("GameState", 0);
+        }
+    }
+    private void Start()
+    {
+        if (PlayerPrefs.GetInt("GameState") == 0)
         {
             CreateName();
+            Debug.Log("Menu Scren Open");
             //StartCoroutine(CoundDownStart(1f));
             //StartCoroutine(BigArrow(2.5f));
         }
         else
         {
+            Debug.Log("Menu Scren Close");
             countDownTimeObject.SetActive(false);
             bigArrow.SetActive(false);
             Menu.SetActive(false);
+            CloseMenu();
             //bigArrowPortal.SetActive(false);
         }
     }
-
+   
     IEnumerator CoundDownStart(float t)
     {
         while (countDownTime > 0)
@@ -43,14 +57,13 @@ public class CoundDownController : MonoBehaviour
 
             countDownTime--;
         }
+        countDownDisplay.text = "GO!";
 
-        countDownDisplay.text = "GO";
-
-        PlayerPrefs.SetInt("GameStart", 1);
-
-        yield return new WaitForSeconds(t);
+        PlayerPrefs.SetInt("GameState", 1);
+        PlayerPrefs.Save();
 
         countDownDisplay.gameObject.SetActive(false);
+        yield return new WaitForSeconds(t);
     }
 
     IEnumerator BigArrow(float t)
@@ -67,9 +80,11 @@ public class CoundDownController : MonoBehaviour
         PlayerPrefs.Save();
         nameEnable = true;
     }
+
     public void CloseMenu()
     {
         Menu.SetActive(false);
+        mame.text = PlayerPrefs.GetString("user_name");
         StartCoroutine(CoundDownStart(1f));
         StartCoroutine(BigArrow(2.5f));
     }

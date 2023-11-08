@@ -12,11 +12,12 @@ public class ShopSettings : MonoBehaviour
     [SerializeField] private GameObject[] caps;
     [SerializeField] private Image mainSlot;
     [SerializeField] private Text PriceText;
-    private HoleManager holeManager;
-    private bool isSave = false;
 
     [Header("Money")]
     private int TotalMoney;
+
+    private HoleManager holeManager;
+    private bool isSave = false;
 
     private void Awake()
     {
@@ -24,12 +25,13 @@ public class ShopSettings : MonoBehaviour
         {
             PlayerPrefs.SetInt("Item", 0);
         }
+
+        holeManager = GameObject.Find("HoleDestroyed").GetComponent<HoleManager>();
     }
     private void Start()
     {
-        holeManager = GameObject.Find("HoleDestroyed").GetComponent<HoleManager>();
-
         TotalMoney = PlayerPrefs.GetInt("coins");
+
         Debug.Log("PARA : " + TotalMoney);
 
         mainSlot.sprite = items[0].capObject;
@@ -46,7 +48,7 @@ public class ShopSettings : MonoBehaviour
             }
         }
         CallTheMarket();
-        items[PlayerPrefs.GetInt("Cap")].gameObject.transform.Find("click").transform.Find("text2").GetComponent<Text>().text = "Geydi";
+        items[PlayerPrefs.GetInt("Cap")].gameObject.transform.Find("click").transform.Find("text2").GetComponent<Text>().text = "PURCHASED";
 
         UIController.Instance.ShopArea.SetActive(false);
     }
@@ -70,7 +72,7 @@ public class ShopSettings : MonoBehaviour
 
             if (!items[i].buy)
             {
-                rasim.GetComponentInChildren<Image>().color = new Color(0.4f, 0.4f, 0.4f, 0.25f);
+                rasim.GetComponentInChildren<Image>().color = new Color(0.4f, 0.4f, 0.4f, 0.6f);
                 growingSlot.transform.Find("click").transform.Find("text2").gameObject.SetActive(false);
 
             }
@@ -119,7 +121,7 @@ public class ShopSettings : MonoBehaviour
                     items[i].gameObject.transform.Find("click").transform.Find("text2").GetComponent<Text>().text = "PUT ON";
                 }
             }
-            obje.transform.Find("click").transform.Find("text2").GetComponent<Text>().text = "GEYDİ";
+            obje.transform.Find("click").transform.Find("text2").GetComponent<Text>().text = "PURCHASED";
 
         }
         if (items[id].buy)
