@@ -19448,7 +19448,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4324030117170893687, guid: abaa74f8ae8428140aed4809a02c47ed, type: 3}
       propertyPath: m_text
-      value: Floor 3
+      value: Floor 4
       objectReference: {fileID: 0}
     - target: {fileID: 4324030117344853801, guid: abaa74f8ae8428140aed4809a02c47ed, type: 3}
       propertyPath: m_BlockingMask.m_Bits
@@ -20621,7 +20621,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 5
+  m_Speed: 3
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -20645,10 +20645,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c5e8df2aa7fc144c8d4fd3e420d4ddd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minX: -6
-  maxX: 6
-  minZ: -6
-  maxZ: 6
+  minX: -4
+  maxX: 4
+  minZ: -4
+  maxZ: 4
 --- !u!1 &1629392110
 GameObject:
   m_ObjectHideFlags: 0
@@ -21131,7 +21131,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4324030117170893687, guid: abaa74f8ae8428140aed4809a02c47ed, type: 3}
       propertyPath: m_text
-      value: Floor 2
+      value: Floor 3
       objectReference: {fileID: 0}
     - target: {fileID: 4324030117344853801, guid: abaa74f8ae8428140aed4809a02c47ed, type: 3}
       propertyPath: m_BlockingMask.m_Bits
@@ -22081,7 +22081,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4324030117170893687, guid: abaa74f8ae8428140aed4809a02c47ed, type: 3}
       propertyPath: m_text
-      value: Floor 4
+      value: Floor 5
       objectReference: {fileID: 0}
     - target: {fileID: 4324030117344853801, guid: abaa74f8ae8428140aed4809a02c47ed, type: 3}
       propertyPath: m_BlockingMask.m_Bits
@@ -24115,7 +24115,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4324030117170893687, guid: abaa74f8ae8428140aed4809a02c47ed, type: 3}
       propertyPath: m_text
-      value: Floor 5
+      value: Floor 6
       objectReference: {fileID: 0}
     - target: {fileID: 4324030117344853801, guid: abaa74f8ae8428140aed4809a02c47ed, type: 3}
       propertyPath: m_BlockingMask.m_Bits

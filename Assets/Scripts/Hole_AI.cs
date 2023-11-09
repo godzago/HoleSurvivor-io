@@ -14,17 +14,22 @@ public class Hole_AI : MonoBehaviour
 
     NavMeshAgent navMeshAgent;
     HoleManager holeManager;
+    bool enes = false;
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         holeManager = GameObject.Find("HoleDestroyed").GetComponent<HoleManager>();
+        StartCoroutine(HoleStart(2));
     }
 
     void Update()
     {
-        if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.5f && PlayerPrefs.GetInt("GameState") == 1)
+        if (enes)
         {
-            SetRandomDestination();
+            if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.5f && PlayerPrefs.GetInt("GameState") == 1)
+            {
+                SetRandomDestination();
+            }
         }
     }
 
@@ -39,5 +44,11 @@ public class Hole_AI : MonoBehaviour
         {
             navMeshAgent.speed = 0;
         }
+    }
+
+    IEnumerator HoleStart(int t)
+    {
+        yield return new WaitForSeconds(t);
+        enes = true;
     }
 }

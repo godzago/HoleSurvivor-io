@@ -33,16 +33,17 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] [HideInInspector] private int maxHealth;
     [SerializeField] private TextMeshProUGUI text;
+    [SerializeField] public int[] levelGoals;
 
     int money;
-    public int TotalMoney;
+    [HideInInspector] public int TotalMoney;
     private Rigidbody rgb;
 
     private void Awake()
     {
         if (PlayerPrefs.HasKey("coins") == false)
         {
-            PlayerPrefs.SetInt("coins", 175);
+            PlayerPrefs.SetInt("coins", 0);
         }
         if (PlayerPrefs.HasKey("PortalArrow") == false)
         {
@@ -59,10 +60,8 @@ public class PlayerController : MonoBehaviour
     }
     private void Start()
     {
-        LevelCase(SceneController.sceneNumber);
-
+        LevelCase(PlayerPrefs.GetInt("SceneNumber"));
         Debug.Log("" + maxHealth);
-
         processingBar.maxValue = maxHealth;
         TextToStirng();
     }
@@ -145,7 +144,15 @@ public class PlayerController : MonoBehaviour
             if (moneyCollect.NumOfItemsHolding > 0)
             {
                 moneyCollect.NumOfItemsHolding -= 1;
+                Transform item = moneyCollect.stackedMoney[moneyCollect.NumOfItemsHolding];
+                item.parent = null;
+                item.DOMove(collision.gameObject.transform.position, 0.5f).OnComplete(() => item.gameObject.SetActive(false));
+                if (moneyCollect.NumOfItemsHolding == 0)
+                {
+                    moneyCollect.stackedMoney.Clear();
+                }
             }
+
             TextToStirng();
             SliderSettings();   
             Camera.main.GetComponent<Shake>().StartShake();           
@@ -198,39 +205,41 @@ public class PlayerController : MonoBehaviour
 
     void LevelCase(int levelCount)
     {
-        switch (levelCount)
-        {
-            case 0:
-                maxHealth = 100;
-                break;
-            case 1:
-                maxHealth = 125;
-                break;
-            case 2:
-                maxHealth = 150;
-                break;
-            case 3:
-                maxHealth = 175;
-                break;
-            case 4:
-                maxHealth = 200;
-                break;
-            case 5:
-                maxHealth = 225;
-                break;
-            case 6:
-                maxHealth = 250;
-                break;
-            case 7:
-                maxHealth = 300;
-                break;
-            case 8:
-                maxHealth = 325;
-                break;
-            case 9:
-                maxHealth = 350;
-                break;
-        }
+        maxHealth = levelGoals[levelCount];
+
+        //switch (levelCount)
+        //{
+        //    case 0:
+        //        maxHealth = 100;
+        //        break;
+        //    case 1:
+        //        maxHealth = 125;
+        //        break;
+        //    case 2:
+        //        maxHealth = 150;
+        //        break;
+        //    case 3:
+        //        maxHealth = 175;
+        //        break;
+        //    case 4:
+        //        maxHealth = 200;
+        //        break;
+        //    case 5:
+        //        maxHealth = 225;
+        //        break;
+        //    case 6:
+        //        maxHealth = 250;
+        //        break;
+        //    case 7:
+        //        maxHealth = 300;
+        //        break;
+        //    case 8:
+        //        maxHealth = 325;
+        //        break;
+        //    case 9:
+        //        maxHealth = 350;
+        //        break;
+        //}
     }
 }
 
