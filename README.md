@@ -4,9 +4,8 @@ In this project, I wanted to experiment with the concept of the "hole" mechanic 
 
 Game play video : https://www.youtube.com/watch?v=0ZKDO9Q7cVw&feature=youtu.be
 
+![3](https://github.com/godzago/HoleSurvivor-3D/assets/48593494/89a33fa3-9bd8-4777-bb64-4a654ef10ed7)
 
-![1](https://github.com/godzago/HoleRun/assets/48593494/fbe17381-e056-45fe-ad20-861067ffc542)
-
-![2](https://github.com/godzago/HoleRun/assets/48593494/c2dea8ab-973f-44ae-aedc-a2e66f70258a)
+![2](https://github.com/godzago/HoleSurvivor-3D/assets/48593494/1f752e07-b204-46ff-9960-8070777962f9)
 
 
