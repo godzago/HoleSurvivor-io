@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
         TextToStirng();
     }
 
-    private void FixedUpdate()
+    private void LateUpdate()
     {
         if (money < 0)
         {
@@ -203,6 +203,7 @@ public class PlayerController : MonoBehaviour
         Instantiate(MoneyPrefeb, spawnPosition, Quaternion.identity);
     }
 
+    // level managment
     void LevelCase(int levelCount)
     {
         maxHealth = levelGoals[levelCount];
